@@ -6,7 +6,7 @@ public class Uppg1 {
 
 	private String[] elements;
 	private int size;
-	private static final String EMPTY_LIST_MESSAGE = "";
+	private static final String EMPTY_LIST_MESSAGE = "The list is empty";
 
 	public Uppg1() {
 		this(20);
@@ -28,7 +28,7 @@ public class Uppg1 {
 		}
 	}
 
-	public boolean isEmpty() {
+	public boolean empty() {
 		return this.size == 0;
 	}
 
@@ -74,7 +74,7 @@ public class Uppg1 {
 
 	private void shift(int offset) {
 		String[] temp = new String[this.elements.length];
-		for(int i = 0; i < this.elements.length; i++) {
+		for(int i = 0; i < this.size; i++) {
 			if(i + offset >= 0 && i + offset < this.elements.length) {
 				temp[i + offset] = this.elements[i];
 			}
