@@ -17,8 +17,69 @@ public class Uppg1 {
 		size = 0;
 	}
 
+	public static void main(String[] args) {
+		/*
+		 * Vill testa: lägga till strängar, printa dem printa en tom lista testa
+		 * att exceptions kastas: getFirst/removeFirst och addFirst testa
+		 * metoder exist positivt och negativt testa empty
+		 */
+
+		Uppg1 testList = new Uppg1(3);
+		try { // testa exception getFirst från tom lista
+			String str = testList.getFirst();
+			System.out.println("Exception från tom lista kastades inte!");
+		} catch (NoSuchElementException e) {
+			System.out.println("Exception kastades från getFirst, allt ok");
+		}
+		try { // testa exception removeFirst från tom lista
+			testList.removeFirst();
+			System.out.println("Exception från tom lista kastades inte!");
+		} catch (NoSuchElementException e) {
+			System.out.println("Exception kastades från removeFirst, allt ok");
+		}
+		System.out
+				.println("Printar tom lista, bör se ut som [  ]: " + testList);
+
+		testList.addFirst("Cesar");
+		testList.addFirst("Bertil");
+		testList.addFirst("Adam");
+
+		try { // testa exception för full lista
+			testList.addFirst("Xerxes");
+			System.out.println("Exception från full lista kastades inte!");
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("Exception kastades från addFirst, allt ok");
+		}
+
+		System.out
+				.println("Printar ABC ur bokstaveringsalfabetet: " + testList);
+
+		testList.removeFirst();
+		System.out.println("Printar Bertil Cesar: " + testList);
+
+		if (!testList.exist("Adam")) {
+			System.out.println("Adam finns inte längre, allt ok");
+		} else {
+			System.out.println("Adam finns, Något är fel");
+		}
+
+		if (testList.exist("Bertil")) {
+			System.out.println("Bertil finns, allt ok");
+		} else {
+			System.out.println("Bertil finns inte, Något är fel");
+		}
+
+		testList.removeFirst();
+		testList.removeFirst();
+		if (testList.empty()) {
+			System.out.println("Listan tom, allt ok");
+		} else {
+			System.out.println("Listan inte tom, Något är fel");
+		}
+	}
+
 	public void addFirst(String element) {
-		if(size < elements.length) {
+		if (size < elements.length) {
 			this.shift(1);
 			this.elements[0] = element;
 			this.size++;
@@ -33,7 +94,7 @@ public class Uppg1 {
 	}
 
 	public String getFirst() {
-		if(size > 0) {
+		if (!this.empty()) {
 			return elements[0];
 		} else {
 			throw new NoSuchElementException(EMPTY_LIST_MESSAGE);
@@ -41,7 +102,7 @@ public class Uppg1 {
 	}
 
 	public void removeFirst() {
-		if(size > 0) {
+		if (!this.empty()) {
 			this.shift(-1);
 			this.size--;
 		} else {
@@ -51,20 +112,20 @@ public class Uppg1 {
 
 	public boolean exist(String element) {
 		boolean found = false;
-		for(int i=0; i<this.size; i++){
-			if(this.elements[i].equals(element)){
+		for (int i = 0; i < this.size; i++) {
+			if (this.elements[i].equals(element)) {
 				found = true;
 			}
 		}
-		
+
 		return found;
 	}
 
 	public String toString() {
 		String result = "[ ";
-		for(int i = 0; i < this.size; i++) {
+		for (int i = 0; i < this.size; i++) {
 			result += this.elements[i];
-			if(i < this.size - 1) {
+			if (i < this.size - 1) {
 				result += ", ";
 			}
 		}
@@ -74,11 +135,12 @@ public class Uppg1 {
 
 	private void shift(int offset) {
 		String[] temp = new String[this.elements.length];
-		for(int i = 0; i < this.size; i++) {
-			if(i + offset >= 0 && i + offset < this.elements.length) {
+		for (int i = 0; i < this.size; i++) {
+			if (i + offset >= 0 && i + offset < this.elements.length) {
 				temp[i + offset] = this.elements[i];
 			}
 		}
 		this.elements = temp;
 	}
+
 }
