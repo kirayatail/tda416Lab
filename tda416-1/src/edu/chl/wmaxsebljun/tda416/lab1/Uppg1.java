@@ -18,7 +18,7 @@ public class Uppg1 {
 	}
 
 	public void addFirst(String element) {
-		if (size < elements.length) {
+		if(size < elements.length) {
 			this.shift(1);
 			this.elements[0] = element;
 			this.size++;
@@ -33,7 +33,7 @@ public class Uppg1 {
 	}
 
 	public String getFirst() {
-		if (size > 0) {
+		if(size > 0) {
 			return elements[0];
 		} else {
 			throw new NoSuchElementException(EMPTY_LIST_MESSAGE);
@@ -41,7 +41,7 @@ public class Uppg1 {
 	}
 
 	public void removeFirst() {
-		if (size > 0) {
+		if(size > 0) {
 			this.shift(-1);
 			this.size--;
 		} else {
@@ -50,19 +50,32 @@ public class Uppg1 {
 	}
 
 	public boolean exist(String element) {
-		// TODO
-		return false;
+		boolean found = false;
+		for(int i=0; i<this.size; i++){
+			if(this.elements[i].equals(element)){
+				found = true;
+			}
+		}
+		
+		return found;
 	}
 
 	public String toString() {
-		// TODO
-		return "";
+		String result = "[ ";
+		for(int i = 0; i < this.size; i++) {
+			result += this.elements[i];
+			if(i < this.size - 1) {
+				result += ", ";
+			}
+		}
+		result += " ]";
+		return result;
 	}
 
 	private void shift(int offset) {
 		String[] temp = new String[this.elements.length];
-		for (int i = 0; i < this.elements.length; i++) {
-			if (i + offset >= 0 && i + offset < this.elements.length) {
+		for(int i = 0; i < this.elements.length; i++) {
+			if(i + offset >= 0 && i + offset < this.elements.length) {
 				temp[i + offset] = this.elements[i];
 			}
 		}
