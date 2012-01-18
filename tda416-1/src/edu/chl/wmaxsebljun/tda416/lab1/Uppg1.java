@@ -1,9 +1,12 @@
 package edu.chl.wmaxsebljun.tda416.lab1;
 
+import java.util.NoSuchElementException;
+
 public class Uppg1 {
 
 	private String[] elements;
 	private int size;
+	private static final String EMPTY_LIST_MESSAGE = "";
 
 	public Uppg1() {
 		this(20);
@@ -15,7 +18,14 @@ public class Uppg1 {
 	}
 
 	public void addFirst(String element) {
-		// TODO
+		if (size < elements.length) {
+			this.shift(1);
+			this.elements[0] = element;
+			this.size++;
+		} else {
+			throw new IndexOutOfBoundsException(
+					"There is no room for additional elements.");
+		}
 	}
 
 	public boolean isEmpty() {
@@ -23,13 +33,20 @@ public class Uppg1 {
 	}
 
 	public String getFirst() {
-		// TODO
-		return "";
+		if (size > 0) {
+			return elements[0];
+		} else {
+			throw new NoSuchElementException(EMPTY_LIST_MESSAGE);
+		}
 	}
 
 	public void removeFirst() {
-		this.shift(-1);
-		this.size--;
+		if (size > 0) {
+			this.shift(-1);
+			this.size--;
+		} else {
+			throw new NoSuchElementException(EMPTY_LIST_MESSAGE);
+		}
 	}
 
 	public boolean exist(String element) {
@@ -44,8 +61,8 @@ public class Uppg1 {
 
 	private void shift(int offset) {
 		String[] temp = new String[this.elements.length];
-		for(int i = 0; i < this.elements.length; i++) {
-			if(i + offset >= 0 && i + offset < this.elements.length) {
+		for (int i = 0; i < this.elements.length; i++) {
+			if (i + offset >= 0 && i + offset < this.elements.length) {
 				temp[i + offset] = this.elements[i];
 			}
 		}
