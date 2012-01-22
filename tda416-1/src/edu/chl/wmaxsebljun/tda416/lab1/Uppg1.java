@@ -198,10 +198,17 @@ public class Uppg1 {
 	}
 
 	/**
-	 * Adds a new element in the position p of the list. Elements after p are shifted to
-	 * the right.
+	 * Adds a new element in the position p of the list. Elements after p are
+	 * shifted to the right.
 	 * 
-	 * @param element the string to be added
+	 * The choice to not have p as a parameter was made because there already is
+	 * a method for setting p that properly validates it. It would be out of the
+	 * scope of this method to also set p.
+	 * 
+	 * @see #setP(int p)
+	 * 
+	 * @param element
+	 *            the string to be added
 	 * 
 	 * @throws IndexOutOfBoundsException
 	 *             if the list is full
