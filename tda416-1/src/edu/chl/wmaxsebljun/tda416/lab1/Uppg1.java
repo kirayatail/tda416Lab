@@ -179,11 +179,11 @@ public class Uppg1 {
 	 *             list
 	 */
 	public void setP(int p) throws IndexOutOfBoundsException {
-		if (p <= size && p >= 0) {
+		if (p <= size && p >= 0 && p < this.elements.length) {
 			this.p = p;
 		} else {
 			throw new IndexOutOfBoundsException(
-					"p must point to end of list or an element in the list.");
+					"p must point to the end of the list or an element in the list.");
 		}
 	}
 
@@ -198,20 +198,24 @@ public class Uppg1 {
 	}
 
 	/**
+	 * <p>
 	 * Adds a new element in the position p of the list. Elements after p are
 	 * shifted to the right.
+	 * </p>
 	 * 
+	 * <p>
 	 * The choice to not have p as a parameter was made because there already is
 	 * a method for setting p that properly validates it. It would be out of the
 	 * scope of this method to also set p.
-	 * 
-	 * @see #setP(int p)
+	 * </p>
 	 * 
 	 * @param element
 	 *            the string to be added
 	 * 
 	 * @throws IndexOutOfBoundsException
 	 *             if the list is full
+	 * 
+	 * @see #setP(int p)
 	 */
 	public void addAfterP(String element) throws IndexOutOfBoundsException {
 		if (!this.full()) {
@@ -224,6 +228,51 @@ public class Uppg1 {
 		}
 	}
 
+	public String get(int p) throws IndexOutOfBoundsException {
+		if (p < this.size && p >= 0) {
+			return this.elements[p];
+		} else {
+			throw new IndexOutOfBoundsException();
+		}
+	}
+
+	/**
+	 * Moves p by an offset.
+	 * 
+	 * @param offset
+	 *            the offset p should be moved by
+	 * 
+	 * @throws IndexOutOfBoundsException
+	 *             if the new p is invalid
+	 * 
+	 * @see #setP(int p)
+	 */
+	public void moveP(int offset) throws IndexOutOfBoundsException {
+		this.setP(p + offset);
+	}
+
+	/**
+	 * Sets p to the position of the element if it is added to the list.
+	 * 
+	 * @param element
+	 *            the element p should point to
+	 * @throws NoSuchElementException
+	 *             if the element is not in the list
+	 */
+	public void moveP(String element) throws NoSuchElementException {
+		for (int i = 0; i < this.size; i++) {
+			if (element.equals(this.elements[i])) {
+				setP(i);
+			}
+		}
+		throw new NoSuchElementException();
+	}
+
+	/**
+	 * Checks if there is room for additional elements in the list.
+	 * 
+	 * @return <code>true</code> if the list is full
+	 */
 	public boolean full() {
 		return this.size == this.elements.length;
 	}
