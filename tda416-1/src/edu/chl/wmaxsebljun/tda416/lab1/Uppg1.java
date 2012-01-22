@@ -78,7 +78,15 @@ public class Uppg1 {
 		}
 	}
 
-	public void addFirst(String element) {
+	/**
+	 * Adds an element to the first position in the list.
+	 * 
+	 * @param element
+	 *            the string to add to the list
+	 * @throws IndexOutOfBoundsException
+	 *             if there is no room for the element
+	 */
+	public void addFirst(String element) throws IndexOutOfBoundsException {
 		if (size < elements.length) {
 			this.shift(1);
 			this.elements[0] = element;
@@ -93,7 +101,14 @@ public class Uppg1 {
 		return this.size == 0;
 	}
 
-	public String getFirst() {
+	/**
+	 * Gets the first string in the list if any.
+	 * 
+	 * @return the first element
+	 * @throws IndexOutOfBoundsException
+	 *             if the list is empty
+	 */
+	public String getFirst() throws NoSuchElementException {
 		if (!this.empty()) {
 			return elements[0];
 		} else {
@@ -101,7 +116,14 @@ public class Uppg1 {
 		}
 	}
 
-	public void removeFirst() {
+	/**
+	 * Removes the first element from the list if any. Doesn't return the
+	 * element since that is the responsibility of getFirst().
+	 * 
+	 * @throws NoSuchElementException
+	 *             if the list is empty
+	 */
+	public void removeFirst() throws NoSuchElementException {
 		if (!this.empty()) {
 			this.shift(-1);
 			this.size--;
@@ -110,6 +132,13 @@ public class Uppg1 {
 		}
 	}
 
+	/**
+	 * Checks if a string already has been added to the list.
+	 * 
+	 * @param element
+	 *            the string to look for
+	 * @return <code>true</code> if the element already has been added
+	 */
 	public boolean exist(String element) {
 		boolean found = false;
 		for (int i = 0; i < this.size; i++) {
@@ -142,5 +171,4 @@ public class Uppg1 {
 		}
 		this.elements = temp;
 	}
-
 }
