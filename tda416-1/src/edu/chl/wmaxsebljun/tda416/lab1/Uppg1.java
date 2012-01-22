@@ -6,6 +6,7 @@ public class Uppg1 {
 
 	private String[] elements;
 	private int size;
+	private int p;
 	private static final String EMPTY_LIST_MESSAGE = "The list is empty";
 
 	public Uppg1() {
@@ -15,6 +16,7 @@ public class Uppg1 {
 	public Uppg1(int capacity) {
 		elements = new String[capacity];
 		size = 0;
+		p = 0;
 	}
 
 	public static void main(String[] args) {
@@ -97,6 +99,11 @@ public class Uppg1 {
 		}
 	}
 
+	/**
+	 * Check if the list is empty.
+	 * 
+	 * @return <code>true</code> if the list is empty
+	 */
 	public boolean empty() {
 		return this.size == 0;
 	}
@@ -160,6 +167,32 @@ public class Uppg1 {
 		}
 		result += " ]";
 		return result;
+	}
+
+	/**
+	 * Sets p to a position in the list.
+	 * 
+	 * @param p
+	 *            the index p should point to
+	 * @throws IndexOutOfBoundsException
+	 *             if p is not within the list or the first element after the
+	 *             list
+	 */
+	public void setP(int p) throws IndexOutOfBoundsException {
+		if (p <= size && p >= 0) {
+			this.p = p;
+		} else
+			throw new IndexOutOfBoundsException();
+	}
+
+	/**
+	 * Checks whether there is an element after p. The only case when this is
+	 * <code>false</code> is when p points on the end of the list.
+	 * 
+	 * @return <code>true</code> if p points on an element
+	 */
+	public boolean hasNext() {
+		return this.p < this.size;
 	}
 
 	private void shift(int offset) {
