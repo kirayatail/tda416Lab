@@ -8,7 +8,8 @@ public class Uppg1 {
 	private int size;
 	private int p;
 	private static final String EMPTY_LIST_MESSAGE = "The list is empty";
-	private static final String FULL_LIST_MESSAGE = "The list is full and the element couldn't be added";
+	private static final String FULL_LIST_MESSAGE =
+			"The list is full and the element couldn't be added";
 
 	public Uppg1() {
 		this(20);
