@@ -8,6 +8,7 @@ public class Uppg1 {
 	private int size;
 	private int p;
 	private static final String EMPTY_LIST_MESSAGE = "The list is empty";
+	private static final String FULL_LIST_MESSAGE = "The list is full and the element couldn't be added";
 
 	public Uppg1() {
 		this(20);
@@ -89,13 +90,12 @@ public class Uppg1 {
 	 *             if there is no room for the element
 	 */
 	public void addFirst(String element) throws IndexOutOfBoundsException {
-		if (size < elements.length) {
+		if (!full()) {
 			this.shift(1);
 			this.elements[0] = element;
 			this.size++;
 		} else {
-			throw new IndexOutOfBoundsException(
-					"There is no room for additional elements.");
+			throw new IndexOutOfBoundsException(FULL_LIST_MESSAGE);
 		}
 	}
 
@@ -181,18 +181,44 @@ public class Uppg1 {
 	public void setP(int p) throws IndexOutOfBoundsException {
 		if (p <= size && p >= 0) {
 			this.p = p;
-		} else
-			throw new IndexOutOfBoundsException();
+		} else {
+			throw new IndexOutOfBoundsException(
+					"p must point to end of list or an element in the list.");
+		}
 	}
 
 	/**
 	 * Checks whether there is an element after p. The only case when this is
-	 * <code>false</code> is when p points on the end of the list.
+	 * <code>false</code> is when p points to the end of the list.
 	 * 
 	 * @return <code>true</code> if p points on an element
 	 */
 	public boolean hasNext() {
 		return this.p < this.size;
+	}
+
+	/**
+	 * Adds a new element in the position p of the list. Elements after p are shifted to
+	 * the right.
+	 * 
+	 * @param element the string to be added
+	 * 
+	 * @throws IndexOutOfBoundsException
+	 *             if the list is full
+	 */
+	public void addAfterP(String element) throws IndexOutOfBoundsException {
+		if (!this.full()) {
+			System.arraycopy(this.elements, this.p, this.elements, this.p + 1,
+					this.size - this.p);
+			this.size++;
+			this.elements[p] = element;
+		} else {
+			throw new IndexOutOfBoundsException(FULL_LIST_MESSAGE);
+		}
+	}
+
+	public boolean full() {
+		return this.size == this.elements.length;
 	}
 
 	private void shift(int offset) {
