@@ -2,6 +2,20 @@ package edu.chl.wmaxsebljun.tda416.lab1;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Enkel datastruktur med begränsad kapacitet. Vår implementation är enkel och rättfram vilket möjligen ger nackdelar i prestanda.
+ * Listan fylls på med första elementet på plats 0 och behåller en logisk struktur där elementen står i traditionell ordning.
+ * Eftersom det läggs vikt vid att hantera första elementet i listan vid varje givet tillfälle så sker många kopieringar och 
+ * skiftningar av element för att behålla strukturen. En prestandamässigt bättre variant hade varit att spegelvända listan så att 
+ * exempelvis första elementet hamnar på plats 0 och "nästa första" element hamnar på plats 1 samtidigt som en intern pekare håller 
+ * koll på var listans huvud finns. Vi valde att inte implementera listan på det sättet för tydlighetens skull. 
+ * Strukturen påminner om en blandning mellan en ArrayList och en Stack. Det vi saknas för en ArrayList är bl.a. add() som 
+ * lägger till element sist i listan.
+ * 
+ * 
+ * @author Sebastian Ljunggren, Max Witt grupp 10
+ *
+ */
 public class Uppg1 {
 
 	private String[] elements;
@@ -283,7 +297,8 @@ public class Uppg1 {
 
 		return found;
 	}
-
+	
+	@Override
 	public String toString() {
 		String result = "[ ";
 		for (int i = 0; i < this.size; i++) {
