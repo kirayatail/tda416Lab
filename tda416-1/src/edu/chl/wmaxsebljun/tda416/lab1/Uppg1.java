@@ -8,19 +8,30 @@ public class Uppg1 {
 	private int size;
 	private int p;
 	private static final String EMPTY_LIST_MESSAGE = "The list is empty";
-	private static final String FULL_LIST_MESSAGE =
-			"The list is full and the element couldn't be added";
-
+	private static final String FULL_LIST_MESSAGE = "The list is full and the element couldn't be added";
+	
+	/**
+	 * Creates new list with room for 20 elements
+	 * 
+	 */
 	public Uppg1() {
 		this(20);
 	}
-
+	/**
+	 * Creates new list with specified capacity
+	 * 
+	 * @param capacity number of elements
+	 */
 	public Uppg1(int capacity) {
 		elements = new String[capacity];
 		size = 0;
 		p = 0;
 	}
-
+	
+	/**
+	 * Tests the entire class. Log output in Swedish.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		/*
 		 * Vill testa: lägga till strängar, printa dem printa en tom lista testa
@@ -39,7 +50,7 @@ public class Uppg1 {
 			testList.removeFirst();
 			System.out.println("Exception från tom lista kastades inte!");
 		} catch (NoSuchElementException e) {
-			System.out.println("Exception kastades från removeFirst, allt ok");
+			System.out.println("Exception kastades från removeFirst, allt OK");
 		}
 		System.out
 				.println("Printar tom lista, bör se ut som [  ]: " + testList);
@@ -47,6 +58,23 @@ public class Uppg1 {
 		testList.addFirst("Cesar");
 		testList.addFirst("Bertil");
 		testList.addFirst("Adam");
+
+		try { // testa getFirst och get
+			System.out.println("getFirst fungerar om följande är \"Adam\": "
+					+ testList.getFirst());
+			System.out.println("get fungerar om följande är \"Cesar\": "
+					+ testList.get(2));
+			System.out
+					.println("Fel! get borde ha kastat exception här, men gav istället: "
+							+ testList.get(3));
+		} catch (IndexOutOfBoundsException e) {
+			if (Integer.parseInt(e.getMessage()) == 3) {
+				System.out.println("Exception kastades från get(3), allt OK");
+			} else {
+				System.out.println("Exception kastades från get("
+						+ e.getMessage() + "), FEL!");
+			}
+		}
 
 		try { // testa exception för full lista
 			testList.addFirst("Xerxes");
@@ -73,17 +101,108 @@ public class Uppg1 {
 			System.out.println("Bertil finns inte, Något är fel");
 		}
 
+		testList.setP(0);
+		try { // testa setP dubbelt
+			testList.setP(2);
+			testList.setP(3);
+			System.out.println("Exception från setP kastades inte!");
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("Exception kastades från setP, allt ok");
+		}
+		if (testList.p == 2) {
+			System.out.println("setP fungerar");
+		} else {
+			System.out.println("Fel på setP, ska vara 2 men är: " + testList.p);
+		}
+
+		try { // testa att lägga till sist i listan om p är satt korrekt.
+			testList.addAfterP("David");
+		} catch (IndexOutOfBoundsException e) {
+			// Detta bör inte hända
+			System.out
+					.println("addAfterP kastade ett exception pga. fel med p tidigare.");
+		}
+
+		try { // testa att exc kastas för att listan är full.
+			testList.addAfterP("David");
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("Exception kastades från addAfterP, allt OK.");
+		}
+		System.out
+				.println("Printar listan, bör innehålla \"Bertil, Cesar, David\": "
+						+ testList);
+
+		testList.setP(1);
+		try {
+			testList.moveP(1);
+			System.out.println("Flyttade p med offset, allt OK");
+			testList.moveP(2);
+			System.out.println("Fel. moveP(int) kunde flytta p utanför gränsen");
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("Exception kastades från moveP(int), allt OK");
+		}
+		
+		try {
+			testList.moveP("Bertil");
+			if(testList.p == 0){
+				System.out.println("p pekar på Bertil, allt OK");
+			} else {
+				System.out.println("moveP(String) fungerar inte med godkänd indata, och kastar inget exception!");
+			}
+		} catch(NoSuchElementException e){
+			System.out.println("moveP kastar exception med godkänd indata, FEL");
+		}
+		try {
+			testList.moveP("Adam");
+			System.out.println("moveP(String) får felaktig indata men kastar inget exception!");
+		} catch(NoSuchElementException e){
+			System.out.println("Exception kastades från moveP(String), allt OK");
+		}
+
 		testList.removeFirst();
+		if (testList.p == 0) {
+			System.out.println("p skiftas vid removeFirst, allt OK");
+		} else {
+			System.out.println("Fel vid removeFirst. p bör vara 0, är: "
+					+ testList.p);
+		}
+		testList.setP(1);
+		if (!testList.hasNext()) {
+			System.out
+					.println("p pekar på sista elementet, hasNext säger nej, allt OK");
+		} else {
+			System.out.println("Fel i hasNext. p pekar på sista elementet");
+		}
+		testList.setP(0);
+		if (testList.hasNext()) {
+			System.out
+					.println("p har element efter sig, hasNext säger ja, allt OK");
+		} else {
+			System.out.println("Fel i hasNext. p har element efter sig");
+		}
+
+		testList.removeFirst();
+		if (testList.p == 0) {
+			System.out.println("p skiftas inte vid removeFirst, allt OK");
+		} else {
+			System.out.println("Fel vid removeFirst. p bör vara 0, är: "
+					+ testList.p);
+		}
 		testList.removeFirst();
 		if (testList.empty()) {
 			System.out.println("Listan tom, allt ok");
 		} else {
 			System.out.println("Listan inte tom, Något är fel");
 		}
+		
+		System.out.println("Enligt coverage körs 100% i alla metoder");
 	}
 
 	/**
 	 * Adds an element to the first position in the list.
+	 * 
+	 * @post internal pointer p will shift with the list and point out the same
+	 *       content as before.
 	 * 
 	 * @param element
 	 *            the string to add to the list
@@ -95,6 +214,7 @@ public class Uppg1 {
 			this.shift(1);
 			this.elements[0] = element;
 			this.size++;
+			this.p++;
 		} else {
 			throw new IndexOutOfBoundsException(FULL_LIST_MESSAGE);
 		}
@@ -106,7 +226,7 @@ public class Uppg1 {
 	 * @return <code>true</code> if the list is empty
 	 */
 	public boolean empty() {
-		return this.size == 0;
+		return (this.size == 0);
 	}
 
 	/**
@@ -128,6 +248,9 @@ public class Uppg1 {
 	 * Removes the first element from the list if any. Doesn't return the
 	 * element since that is the responsibility of getFirst().
 	 * 
+	 * @post internal pointer p will shift with the list and point out the same
+	 *       content as before. p will not shift if it points to position 0.
+	 * 
 	 * @throws NoSuchElementException
 	 *             if the list is empty
 	 */
@@ -135,6 +258,9 @@ public class Uppg1 {
 		if (!this.empty()) {
 			this.shift(-1);
 			this.size--;
+			if (this.p > 0) {
+				p--;
+			}
 		} else {
 			throw new NoSuchElementException(EMPTY_LIST_MESSAGE);
 		}
@@ -195,13 +321,13 @@ public class Uppg1 {
 	 * @return <code>true</code> if p points on an element
 	 */
 	public boolean hasNext() {
-		return this.p < this.size;
+		return (this.p < this.size-1);
 	}
 
 	/**
 	 * <p>
 	 * Adds a new element in the position p of the list. Elements after p are
-	 * shifted to the right.
+	 * shifted to the right. p remains the same after this method is called.
 	 * </p>
 	 * 
 	 * <p>
@@ -228,12 +354,18 @@ public class Uppg1 {
 			throw new IndexOutOfBoundsException(FULL_LIST_MESSAGE);
 		}
 	}
-
+	/**
+	 * gets the element at index p. 
+	 * 
+	 * @param p index
+	 * @return String content at index
+	 * @throws IndexOutOfBoundsException p doesn't point to an element
+	 */
 	public String get(int p) throws IndexOutOfBoundsException {
 		if (p < this.size && p >= 0) {
 			return this.elements[p];
 		} else {
-			throw new IndexOutOfBoundsException();
+			throw new IndexOutOfBoundsException("" + p);
 		}
 	}
 
@@ -264,6 +396,7 @@ public class Uppg1 {
 		for (int i = 0; i < this.size; i++) {
 			if (element.equals(this.elements[i])) {
 				setP(i);
+				return;
 			}
 		}
 		throw new NoSuchElementException();
@@ -277,7 +410,12 @@ public class Uppg1 {
 	public boolean full() {
 		return this.size == this.elements.length;
 	}
-
+	
+	/**
+	 * moves all elements in the list by an offset. if elements fall outside the list bounds, they are silently deleted.
+	 * 
+	 * @param offset positive or negative integer.
+	 */
 	private void shift(int offset) {
 		String[] temp = new String[this.elements.length];
 		for (int i = 0; i < this.size; i++) {
