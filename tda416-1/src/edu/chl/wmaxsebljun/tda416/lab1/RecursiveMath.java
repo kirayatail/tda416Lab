@@ -1,4 +1,5 @@
 package edu.chl.wmaxsebljun.tda416.lab1;
+
 public class RecursiveMath {
 
 	public static void main(String[] args) {
@@ -6,6 +7,15 @@ public class RecursiveMath {
 		System.out.println(binarySqrt(3, 0.000001));
 	}
 
+	/**
+	 * Finds square root by binary search. This is the access method, and
+	 * therefore public.
+	 * 
+	 * @param sqr
+	 * @param eps
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	public static double binarySqrt(double sqr, double eps)
 			throws IllegalArgumentException {
 		/*
@@ -23,6 +33,16 @@ public class RecursiveMath {
 		}
 	}
 
+	/**
+	 * This is the recursive help method that does all work. Does no validation,
+	 * (which is done in the access method) and is private for protection.
+	 * 
+	 * @param sqr
+	 * @param eps
+	 * @param low
+	 * @param high
+	 * @return
+	 */
 	private static double help(double sqr, double eps, double low, double high) {
 		/*
 		 * Rekursiv metod med följande karaktär: parametrar sqr och eps följer
@@ -34,7 +54,7 @@ public class RecursiveMath {
 		 */
 
 		double candidate = (high + low) / 2;
-		
+
 		if (Math.abs(candidate * candidate - sqr) < eps) {
 			return candidate;
 		} else {
