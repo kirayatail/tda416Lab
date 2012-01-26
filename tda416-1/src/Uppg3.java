@@ -5,7 +5,11 @@ public class Uppg3 {
 	 */
 
 	/*
-	 * b)
+	 * b) Handviftning: Det som samtliga metoder har gemensamt är att de gör
+	 * operationer med konstant tidsåtgång inuti loopar med arrayens storlek i
+	 * värsta fall. Därmed kan vi snabbt avgöra att variant 1 har O(n^3)
+	 * eftersom tre loopar i värsta fall går igenom hela fältet.
+	 * Enligt samma mönster gäller O(n^2) för variant 2 och O(n) för variant 3.
 	 */
 
 	/*
