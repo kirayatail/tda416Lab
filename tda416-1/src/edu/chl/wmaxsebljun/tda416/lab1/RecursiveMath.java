@@ -4,7 +4,8 @@ public class RecursiveMath {
 
 	public static void main(String[] args) {
 		System.out.println(binarySqrt(81, 0.000001));
-		System.out.println(binarySqrt(3, 0.000001));
+		System.out.println(binarySqrt(9, 0.000001));
+		System.out.println(binarySqrt(102400,0.000001));
 	}
 
 	/**
@@ -54,7 +55,7 @@ public class RecursiveMath {
 		 */
 
 		double candidate = (high + low) / 2;
-
+		System.out.println("\t "+candidate);
 		if (Math.abs(candidate * candidate - sqr) < eps) {
 			return candidate;
 		} else {
