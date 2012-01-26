@@ -43,7 +43,6 @@ public class RecursiveMath {
 	private static double help(double sqr, double eps, double low, double high) {
 		
 		double candidate = (high + low) / 2;
-		System.out.println("\t "+candidate);
 		if (Math.abs(candidate * candidate - sqr) < eps) {
 			return candidate;
 		} else {
