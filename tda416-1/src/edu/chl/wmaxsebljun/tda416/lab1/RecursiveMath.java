@@ -19,11 +19,7 @@ public class RecursiveMath {
 	 */
 	public static double binarySqrt(double sqr, double eps)
 			throws IllegalArgumentException {
-		/*
-		 * Fasadmetod som anropar help, där allt jobb görs. Ska kontrollera
-		 * indata. Bounds för high och low är 1 och sqr. sqr ska vara större än
-		 * 1
-		 */
+		
 		if (sqr < 1) {
 			throw new IllegalArgumentException("Argument sqr must be >1");
 
@@ -45,15 +41,7 @@ public class RecursiveMath {
 	 * @return
 	 */
 	private static double help(double sqr, double eps, double low, double high) {
-		/*
-		 * Rekursiv metod med följande karaktär: parametrar sqr och eps följer
-		 * med i varje anrop low och high förändras för varje anrop yttre bounds
-		 * enligt fasadmetoden
-		 * 
-		 * eps innebär nogrannhet, check enligt följande: kandidat^2 - sqr < eps
-		 * OK! annars en ny runda.
-		 */
-
+		
 		double candidate = (high + low) / 2;
 		System.out.println("\t "+candidate);
 		if (Math.abs(candidate * candidate - sqr) < eps) {
