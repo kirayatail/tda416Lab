@@ -1,4 +1,4 @@
-package edu.chl.wmaxsebljun.tda416.lab1;
+
 
 import java.util.NoSuchElementException;
 
