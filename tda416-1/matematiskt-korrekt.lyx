@@ -1,0 +1,93 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman lmodern
+\font_sans lmss
+\font_typewriter lmtt
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Matematiskt korrekt beräkning av komplexitet
+\end_layout
+
+\begin_layout Author
+Sebastian Ljunggren, Max Witt
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{eqnarray*}
+\overset{n}{\underset{i=0}{\sum}}\overset{n}{\underset{j=i}{\sum}}\overset{j}{\underset{k=i}{\sum}}1 & = & \overset{n}{\underset{i=0}{\sum}}\overset{n}{\underset{j=i}{\sum}}\overset{j-i+1}{\underset{k=1}{\sum}}1\\
+ & = & \overset{n}{\underset{i=0}{\sum}}\overset{n}{\underset{j=i}{\sum}(}j-i+1)\\
+ & = & \overset{n}{\underset{i=0}{\sum}}\overset{n-i}{\underset{j=0}{\sum}}(j+1)\\
+ & = & \overset{n}{\underset{i=0}{\sum}}\overset{n-i+1}{\underset{j=1}{\sum}}j\\
+ & = & \overset{n}{\underset{i=0}{\sum}}\frac{(n-i+1)(n-i+2)}{2}\\
+ & = & \frac{1}{2}\overset{n}{\underset{i=0}{\sum}}(n^{2}+i^{2}-2ni+3n-3i+2)\\
+ & = & \frac{1}{2}\overset{n+1}{\underset{i=1}{\sum}}(n^{2}+(i-1)^{2}-2n(i-1)+3n-3(i-1)+2)\\
+ & = & \frac{1}{2}\overset{n+1}{\underset{i=1}{\sum}}(n^{2}+5n+i^{2}-5i-2ni+6)\\
+ & = & \frac{1}{2}((n+1)(n\text{²}+5n+6)-\frac{1}{2}(n^{2}+3n+2)(2n+5)+\overset{n+1}{\underset{i=1}{\sum}}i{}^{2})\\
+ & = & \frac{1}{2}(\frac{n\text{²}}{2}+\frac{3n}{2}+n+1+\frac{n\text{³}}{3}+\frac{3n\text{²}}{2}+\frac{13n}{6}+1)\\
+ & = & \frac{1}{6}n\text{³}+n\text{²}+\frac{11}{6}n+1
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
