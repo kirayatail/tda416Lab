@@ -81,12 +81,61 @@ Sebastian Ljunggren, Max Witt
  & = & \frac{1}{2}\overset{n+1}{\underset{i=1}{\sum}}(n^{2}+5n+i^{2}-5i-2ni+6)\\
  & = & \frac{1}{2}((n+1)(n\text{²}+5n+6)-\frac{1}{2}(n^{2}+3n+2)(2n+5)+\overset{n+1}{\underset{i=1}{\sum}}i{}^{2})\\
  & = & \frac{1}{2}(\frac{n\text{²}}{2}+\frac{3n}{2}+n+1+\frac{n\text{³}}{3}+\frac{3n\text{²}}{2}+\frac{13n}{6}+1)\\
- & = & \frac{1}{6}n\text{³}+n\text{²}+\frac{11}{6}n+1
+ & = & \frac{1}{6}n\text{³}+n\text{²}+\frac{11}{6}n+1\\
+ & = & O(n\text{³})
 \end{eqnarray*}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{eqnarray*}
+\overset{n}{\underset{i=0}{\sum}}\overset{n}{\underset{j=i}{\sum}}1 & = & \overset{n}{\underset{i=0}{\sum}}\overset{n-i+1}{\underset{j=1}{\sum}}1\\
+ & = & \overset{n}{\underset{i=0}{\sum}}(n-i+1)\\
+ & = & (n+1)(n+1)-\overset{n}{\underset{i=0}{\sum}}i\\
+ & = & n^{2}+2n+1-\frac{n^{2}}{2}-\frac{n}{2}\\
+ & = & \frac{n\text{²}}{2}+\frac{3n}{2}+1\\
+ & = & O(n\text{²})
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{eqnarray*}
+\overset{n}{\underset{i=0}{\sum}}1 & = & \overset{n+1}{\underset{i=1}{\sum}}1\\
+ & = & n+1\\
+ & = & O(n)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part*
+Referens
+\end_layout
+
+\begin_layout Standard
+Wikipedia (
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://en.wikipedia.org/wiki/Sums#Some_summations_of_polynomial_expressions
+\end_layout
+
+\end_inset
+
+) för hur man löser en kvadratisk summa.
 \end_layout
 
 \end_body
