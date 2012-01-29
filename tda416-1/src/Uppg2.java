@@ -1,13 +1,9 @@
 /**
- * Problem set 1, exercise 2
  * 
- * 
- * 
- * 
- * @author Sebastian Ljunggren, Max Witt
+ * @author Sebastian Ljunggren, Max Witt, grupp 10
  * 
  */
-public class RecursiveMath {
+public class Uppg2 {
 
 	public static void main(String[] args) {
 		System.out.println(binarySqrt(81, 0.000001));

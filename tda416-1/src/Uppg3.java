@@ -1,3 +1,9 @@
+/**
+ * Svar på frågorna samt kopia av delar ur MaxSum med våra kommentarer.
+ * 
+ * @author Sebastian Ljunggren, Max Witt grupp 10
+ *
+ */
 public class Uppg3 {
 
 	/*

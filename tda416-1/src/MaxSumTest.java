@@ -128,7 +128,7 @@ public class MaxSumTest {
 			System.out.print("algo  #" + alg +"        ");
 			for( int arraySize = 50; arraySize <= 500000; arraySize *= 2 ) { // double the size every time
 				// eventually skip this array size, too slow
-				if( (alg == 1 && arraySize > 1000) ||  (alg == 2 && arraySize > 20000)) {
+				if( (alg == 1 && arraySize > 1000) ||  (alg == 2 && arraySize > 20000)) {	// Changed by Sebastian Ljunggren
 					System.out.printf("%11s" , "-");
 					continue;
 				}
