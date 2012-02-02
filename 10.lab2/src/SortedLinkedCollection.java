@@ -84,17 +84,12 @@ public class SortedLinkedCollection<E extends Comparable<E>> extends
 		if (element == null) {
 			return null;
 		}
-		/*
-		 * Vi pratade med Niklas om att använda iteratorn och han tyckte det var
-		 * ok.
-		 */
-		Iterator<E> i = this.iterator();
-		E inList;
-		while (i.hasNext()) {
-			inList = i.next();
-			if (inList.compareTo(element) == 0) {
-				return inList;
+		Entry current = this.head;
+		while (current != null) {
+			if (current.element.compareTo(element) == 0) {
+				return current.element;
 			}
+			current = current.next;
 		}
 		return null;
 	}
