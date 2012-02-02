@@ -2,6 +2,17 @@ import testSortCol.CollectionWithGet;
 import datastructures.LinkedCollection;
 import java.util.*;
 
+/**
+ * Sorted linked collection implemented by a minimal linked list. Stores
+ * elements according to <code>compareTo()</code>, where the first element given
+ * by the iterator is the smallest. <code>null</code> elements are not allowed,
+ * however, duplicates are allowed.
+ * 
+ * @author Sebastian Ljunggren, Max Witt grupp 10
+ * 
+ * @param <E>
+ *            implements java.util.Comparable<E>
+ */
 public class SortedLinkedCollection<E extends Comparable<E>> extends
 		LinkedCollection<E> implements CollectionWithGet<E> {
 
@@ -30,7 +41,7 @@ public class SortedLinkedCollection<E extends Comparable<E>> extends
 		} else {
 
 			while (current.next != null
-					&& element.compareTo(current.next.element) <= 0) {
+					&& element.compareTo(current.next.element) >= 0) {
 				current = current.next;
 			}
 			current.next = new Entry(element, current.next);
