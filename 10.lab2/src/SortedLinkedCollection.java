@@ -1,7 +1,7 @@
 import datastructures.LinkedCollection;
 
 
-public class SortedLinkedCollection<E extends Comparable<E>> extends LinkedCollection<E> {
+public class SortedLinkedCollection<E extends Comparable<E>> extends LinkedCollection<E> implements CollectionWithGet{
 	
 	public SortedLinkedCollection(){
 		super();
