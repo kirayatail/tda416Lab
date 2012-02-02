@@ -20,6 +20,26 @@ public class SortedLinkedCollection<E extends Comparable<E>> extends
 		super();
 	}
 
+	public static void main(String[] args) {
+		SortedLinkedCollection<Integer> numbers = new SortedLinkedCollection<Integer>();
+		// * lägga till element i en tom lista
+		
+		// * skicka in null, kolla att vi får fel
+
+		// * lägga till element som kommer hamna i slutet av listan
+		
+		// * lägga till element som kommer hamna mitt i listan
+		
+		// * Skicka in element i oordning, kolla att de är sorterade
+		
+		// * testa get
+
+		// * testa get med null
+
+		// * testa get med nåt som inte finns i listan (ska ge null)
+
+	}
+
 	/**
 	 * Adds an element to the collection. The method makes sure it is added in
 	 * the correct position. Duplicates are allowed.
