@@ -149,7 +149,7 @@ public class SortedLinkedCollection<E extends Comparable<E>> extends
 		} else {
 
 			while (current.next != null
-					&& element.compareTo(current.next.element) >= 0) {
+					&& element.compareTo(current.next.element) > 0) {
 				current = current.next;
 			}
 			current.next = new Entry(element, current.next);
