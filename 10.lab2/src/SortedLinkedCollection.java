@@ -175,7 +175,7 @@ public class SortedLinkedCollection<E extends Comparable<E>> extends
 			int comparison = current.element.compareTo(element);
 			if (comparison == 0) {
 				return current.element;
-			} else if(comparison > 0){
+			} else if (comparison > 0) {
 				// We've gone too far, ending early.
 				return null;
 			}
