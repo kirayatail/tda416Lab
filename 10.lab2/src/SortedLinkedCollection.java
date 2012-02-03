@@ -1,6 +1,5 @@
 import testSortCol.CollectionWithGet;
 import datastructures.LinkedCollection;
-import java.util.*;
 
 /**
  * Sorted linked collection implemented by a minimal linked list. Stores
