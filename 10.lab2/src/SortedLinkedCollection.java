@@ -143,11 +143,10 @@ public class SortedLinkedCollection<E extends Comparable<E>> extends
 		if (element == null) {
 			throw new IllegalArgumentException("Argument cannot be null");
 		}
-		Entry current = this.head;
 		if (head == null) {
 			head = new Entry(element, null);
 		} else {
-
+			Entry current = this.head;
 			while (current.next != null
 					&& element.compareTo(current.next.element) > 0) {
 				current = current.next;
