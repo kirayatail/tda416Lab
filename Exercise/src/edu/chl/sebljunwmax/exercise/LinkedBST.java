@@ -17,12 +17,21 @@ import java.util.*;
  * 
  */
 public class LinkedBST<E> {
+	private Entry root;
 	
 	public LinkedBST(){
-		
+		root = null;
 	}
 	
-	public void add(int id, E data){
+	public void add(int id, E data){		
+		if(this.root == null){
+			this.root = new Entry(id, data, null);
+		} else {
+			Entry candidate = this.root;
+			// TODO: Finish somehow... 
+			// don't forget to just update the payload if the id already exists
+			// underlying message: No duplicates allowed!
+		}
 		
 	}
 	/**
@@ -34,6 +43,7 @@ public class LinkedBST<E> {
 	public void remove(int id) throws NoSuchElementException{
 		
 	}
+	 
 	
 	/**
 	 * 
@@ -42,8 +52,18 @@ public class LinkedBST<E> {
 	 * @throws NoSuchElementException
 	 */
 	public E get(int id) throws NoSuchElementException{
+		Entry candidate = this.root;
 		
-		return null;
+		while(candidate != null){
+			if(candidate.id < id){
+				candidate = candidate.left;
+			} else if(candidate.id > id){
+				candidate = candidate.right;
+			} else if(candidate.id == id){
+				return candidate.data;
+			}
+		}
+		throw new NoSuchElementException();
 	}
 	
 	/**
@@ -52,7 +72,18 @@ public class LinkedBST<E> {
 	 * @return if specified element exists
 	 */
 	public boolean hasElement(int id){
-		return true;
+		Entry candidate = this.root;
+		
+		while(candidate != null){
+			if(candidate.id < id){
+				candidate = candidate.left;
+			} else if(candidate.id > id){
+				candidate = candidate.right;
+			} else if(candidate.id == id){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -61,15 +92,20 @@ public class LinkedBST<E> {
 	 *
 	 * @param <E>
 	 */
-	public class Entry<E>{
-		private Entry<E> parent;
-		private Entry<E> left;
-		private Entry<E> right;
-		private int id;
-		private E data;
+	
+	public class Entry{
+		public Entry parent;
+		public Entry left;
+		public Entry right;
+		public int id;
+		public E data;
 		
-		public Entry(int id, E data, Entry<E> parent){
-			
+		public Entry(int id, E data, Entry parent){
+			this.parent = parent;
+			this.data = data;
+			this.id = id;
+			this.left = null;
+			this.right = null;
 		}
 		
 	}
