@@ -33,14 +33,19 @@ public class LinkedBST<E> {
 			} else {
 				this.recursiveAdd(this.root, id, data);
 			}
-
-			// TODO: Finish somehow...
-			// don't forget to just update the payload if the id already exists
-			// underlying message: No duplicates allowed!
 		}
 
 	}
-
+	
+	/**
+	 * Recursive add function. Erland would be proud.
+	 * 
+	 * @pre candidate is a valid node, id is not a duplicate
+	 * 
+	 * @param candidate
+	 * @param id
+	 * @param data
+	 */
 	private void recursiveAdd(Entry candidate, int id, E data) {
 		if (id < candidate.id) {
 			if (candidate.left == null) {
@@ -67,9 +72,39 @@ public class LinkedBST<E> {
 	 *             - if specified node doesn't exist already.
 	 */
 	public void remove(int id) throws NoSuchElementException {
-
+		Entry candidate = this.getEntry(id);
+		Entry newCand = null;
+		if(candidate == null){
+			throw new NoSuchElementException();
+		}
+		
+		Entry parent = candidate.parent;
+		if(candidate.left == null && candidate.right == null){
+			newCand = findMax(candidate.left);			
+			newCand.right = candidate.right;
+		} else if(candidate.left == null){
+			newCand = candidate.right;
+		} else if(candidate.right == null){
+			newCand = candidate.left;
+		}
+		
+		if(parent.left.id == candidate.id){
+			parent.left = newCand;
+		} else {
+			parent.right = newCand;
+		}
+		if(newCand != null){
+			newCand.parent = parent;
+		}
 	}
-
+	
+	private Entry findMax(Entry e){
+		if(e.right == null){
+			return e;
+		} else {
+			return findMax(e.right);
+		}
+	}
 	/**
 	 * 
 	 * @param id
