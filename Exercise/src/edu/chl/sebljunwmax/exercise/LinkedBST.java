@@ -124,9 +124,9 @@ public class LinkedBST<E> {
 		Entry candidate = this.root;
 
 		while (candidate != null) {
-			if (candidate.id < id) {
+			if (candidate.id > id) {
 				candidate = candidate.left;
-			} else if (candidate.id > id) {
+			} else if (candidate.id < id) {
 				candidate = candidate.right;
 			} else if (candidate.id == id) {
 				return candidate;
