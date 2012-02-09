@@ -7,7 +7,33 @@ import testSortCol.CollectionWithGet;
 public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree<E> implements CollectionWithGet<E>{
 	
 	public static void main(String[] args){
+		SplayTree<Integer> sp = new SplayTree<Integer>();
+		sp.add(3);
+		sp.add(4);
+		sp.add(2);
+		sp.add(5);
+		sp.add(9);
+		sp.add(6);
+		System.out.println(""+sp.get(5));
+	}
+	
+	private void check(Entry x){
+		boolean flag = false;
 		
+		if(x.left != null){
+			if(x.element.compareTo(x.left.element) < 0)
+				flag = true;
+			check(x.left);
+		}
+		if(x.right != null){
+			if(x.element.compareTo(x.right.element) < 0)
+				flag = true;
+			check(x.right);
+		}
+		
+		if(flag){
+			System.out.println("Fel i entry "+x.toString());
+		}
 	}
 	
 	@Override
@@ -15,7 +41,8 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		Entry candidate = this.find(e, root);
 		if(candidate != null){
 			splay(candidate);
-			return candidate.element;
+			check(this.root);
+			return root.element;
 		} else {
 			return null;
 		}
