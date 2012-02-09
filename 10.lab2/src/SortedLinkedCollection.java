@@ -29,11 +29,11 @@ public class SortedLinkedCollection<E extends Comparable<E>> extends
 	 */
 	public static void main(String[] args) {
 		SortedLinkedCollection<Integer> numbers = new SortedLinkedCollection<Integer>();
-		// Siffror som läggs till: 3,3,5,7,9 i ordningen 3,7,9,5,3
+		// Siffror som läggs till: 3,3,5,7,9 i ordningen 5,3,7,9,3
 
 		System.out.println("testar att lägga till element i en tom lista: ");
-		numbers.add(3);
-		if (numbers.head.element.equals(3)) {
+		numbers.add(5);
+		if (numbers.head.element.equals(5)) {
 			System.out.println("Ok!");
 		} else {
 			System.out
@@ -48,7 +48,13 @@ public class SortedLinkedCollection<E extends Comparable<E>> extends
 		} catch (IllegalArgumentException e) {
 			System.out.println("Ok!");
 		}
-
+		System.out.println("testar att lägga till element som kommer hamna först i listan");
+		numbers.add(3);
+		if(numbers.head.element.equals(3) && numbers.head.next.element.equals(5)){
+			System.out.println("Ok!");
+		} else {
+			System.out.println("Fel! kunde inte lägga till element först i listan");
+		}
 		System.out
 				.println("testar att lägga till element som kommer hamna i slutet av listan: ");
 		numbers.add(7);
@@ -66,7 +72,6 @@ public class SortedLinkedCollection<E extends Comparable<E>> extends
 
 		System.out
 				.println("testar att lägga till element som kommer hamna mitt i listan: ");
-		numbers.add(5);
 		entry = numbers.head.next;
 		if (entry.element == 5 && entry.next.element == 7) {
 			System.out.println("Ok!");
@@ -144,6 +149,8 @@ public class SortedLinkedCollection<E extends Comparable<E>> extends
 		}
 		if (head == null) {
 			head = new Entry(element, null);
+		} else if(element.compareTo(head.element) < 0){
+			this.head = new Entry(element, head);
 		} else {
 			Entry current = this.head;
 			while (current.next != null
