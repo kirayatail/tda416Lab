@@ -19,8 +19,49 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 	/**
 	 * 
 	 */
-	private void splay(Entry n){
-		// TODO Splay
+	private void splay(Entry x){
+		// PSEUDOKOD!! \\
+		
+		/*
+		 * If x == root
+		 * 		do nothing and return.
+		 */
+		
+		/*
+		 * If x's parent == root
+		 * 		if x is left kid
+		 * 		then rotate right
+		 * 		
+		 * 		otherwise rotate left
+		 * 
+		 * 		root = x
+		 */
+		
+		/*
+		 * Get x's grandparent. (save for later)
+		 */
+		
+		/*
+		 * If x is the ... 
+		 * 		left-left kid   --  rotate double right
+		 * 
+		 * 		left-right kid  --  rotate left-right
+		 * 		
+		 * 		right-left kid  --  rotate right-left
+		 * 
+		 * 		right-right kid --  rotate double left
+		 * 
+		 * 		(this might seem confusing, but rotations and ancestry don't match)
+		 */
+		
+		/*
+		 * If root == x's grandparent
+		 * 		then root = x
+		 */
+		
+		/*
+		 * Splay x again
+		 */
 	}
 	
 	 /* Rotera 1 steg i högervarv, dvs 
