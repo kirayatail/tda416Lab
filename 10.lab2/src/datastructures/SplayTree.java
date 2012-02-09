@@ -1,9 +1,5 @@
 package datastructures;
 
-import java.util.List;
-
-import datastructures.BinarySearchTree.Entry;
-
 import testSortCol.CollectionWithGet;
 
 public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree<E> implements CollectionWithGet<E>{
@@ -357,9 +353,6 @@ A   x'             A   B C   D
 	} // rotateRightLeft
 	
 	protected Entry splayFind(E elemement, Entry candidate) {
-		if (candidate == null) {
-			return null;
-		}
 		int comparison = elemement.compareTo(candidate.element);
 		if (comparison < 0) {
 			if (candidate.left == null) {
