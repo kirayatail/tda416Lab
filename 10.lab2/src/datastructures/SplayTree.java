@@ -98,11 +98,28 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		splay(x);
 	}
 	
-	 /* Rotera 1 steg i högervarv, dvs 
+	 /* Rotera 1 steg i v�nstervarv, dvs 
+	    y'                 x'
+	   / \                / \
+	  A   x'  -->        y'  C
+	     / \            / \  
+	    B   C          A   B   
+	*/
+		private void rotateLeft(Entry x) {
+			Entry y = x.parent;
+			y.right = x.left;
+			if(y.right != null){
+				y.right.parent = y;
+			}
+			x.left = y;
+			x.parent = y.parent;
+			y.parent = x;
+		} // rotateLeft
+
+	/* Rotera 1 steg i högervarv, dvs 
 	  * 
 	  * Här känner vi inledningsvis till elementet som skall gå mot toppen,
 	  * till skillnad från AVL där vi tittar uppifrån och ned på noderna.
-	  * 
 	  * 
 	  * 
 	    y'                 x'
@@ -117,29 +134,12 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		if(y.left != null){
 			y.left.parent = y;
 		}
+		
 		x.right = y;
 		x.parent = y.parent;
 		y.parent = x;
 		
 	} //   rotateRight
-
-/* Rotera 1 steg i v�nstervarv, dvs 
-    y'                 x'
-   / \                / \
-  A   x'  -->        y'  C
-     / \            / \  
-    B   C          A   B   
-*/
-	private void rotateLeft(Entry x) {
-		Entry y = x.parent;
-		y.right = x.left;
-		if(y.right != null){
-			y.right.parent = y;
-		}
-		x.left = y;
-		x.parent = y.parent;
-		y.parent = x;
-	} // rotateLeft
 
 /* Rotera 2 steg vänster
 			z'					x'
