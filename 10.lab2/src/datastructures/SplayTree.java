@@ -17,34 +17,41 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		System.out.println(""+sp.get(5));
 	}
 	
-	private void check(Entry x){
-		boolean flag = false;
-		
-		if(x.left != null){
-			if(x.element.compareTo(x.left.element) < 0)
-				flag = true;
-			check(x.left);
-		}
-		if(x.right != null){
-			if(x.element.compareTo(x.right.element) < 0)
-				flag = true;
-			check(x.right);
-		}
-		
-		if(flag){
-			System.out.println("Fel i entry "+x.toString());
+	@Override
+	public E get(E e) {
+		if(root != null){
+			return this.findSplayClosest(e, this.root);
+		} else {
+			return null;
 		}
 	}
 	
-	@Override
-	public E get(E e) {
-		Entry candidate = this.find(e, root);
-		if(candidate != null){
-			splay(candidate);
-			check(this.root);
-			return root.element;
+	/**
+	 * Finds the Entry with the specified element and splays on it, or the closest node if not found.
+	 * @param e
+	 * @param x
+	 * @return target element or null if not found
+	 */
+	private E findSplayClosest(E e, Entry x){
+		
+		int comparison = x.element.compareTo(e);
+		if(comparison > 0){
+			if(x.left != null){
+				return findSplayClosest(e, x.left);
+			} else {
+				splay(x);
+				return null;
+			}
+		} else if(comparison < 0){
+			if(x.right != null){
+				return findSplayClosest(e, x.right);
+			} else {
+				splay(x);
+				return null;
+			}
 		} else {
-			return null;
+			splay(x);
+			return this.root.element;
 		}
 	}
 	/*
@@ -98,13 +105,17 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		 * 
 		 * 		(this might seem confusing, but rotations and ancestry don't match)
 		 */
-			if(x.element.compareTo(gp.element) < 0){ // x is left-something
+			boolean foundX = false;
+			if(gp.left != null){ // x might be left-something
 				if(x == gp.left.left){
 					x = rotateDoubleRight(x);
-				} else { // left-right
+					foundX = true;
+				} else if(x == gp.left.right) { // left-right
 					x = rotateLeftRight(x);
+					foundX = true;
 				}
-			} else {
+			}
+			if(gp.right != null && !foundX){
 				if(x == gp.right.left){
 					x = rotateRightLeft(x);
 				} else {
