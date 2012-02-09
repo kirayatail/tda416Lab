@@ -2,6 +2,8 @@ package datastructures;
 
 import java.util.List;
 
+import datastructures.BinarySearchTree.Entry;
+
 import testSortCol.CollectionWithGet;
 
 public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree<E> implements CollectionWithGet<E>{
@@ -19,8 +21,15 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 	
 	@Override
 	public E get(E e) {
-		if(root != null){
+		if(root != null && e != null){
 			return this.findSplayClosest(e, this.root);
+			// Alternativ version.
+//			Entry candidate =  this.splayFind(e, this.root);
+//			if (candidate != null) {
+//				return this.root.element;
+//			} else {
+//				return null;
+//			}
 		} else {
 			return null;
 		}
@@ -346,5 +355,30 @@ A   x'             A   B C   D
 		}
 		return z;
 	} // rotateRightLeft
+	
+	protected Entry splayFind(E elemement, Entry candidate) {
+		if (candidate == null) {
+			return null;
+		}
+		int comparison = elemement.compareTo(candidate.element);
+		if (comparison < 0) {
+			if (candidate.left == null) {
+				splay(candidate);
+				return null;
+			} else {
+				return splayFind(elemement, candidate.left);
+			}
+		} else if (comparison > 0) {
+			if (candidate.right == null) {
+				splay(candidate);
+				return null;
+			} else {
+				return splayFind(elemement, candidate.right);
+			}
+		} else {
+			splay(candidate);
+			return candidate;
+		}
+	}
 
 }
