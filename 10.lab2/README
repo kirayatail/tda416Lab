@@ -3,3 +3,12 @@ Sebastian Ljunggren, Max Witt
 
 Files in directory "res" are not written by us, but given as material for the problem set. 
 The SortedLinkedCollection resides in the src directory.
+
+Värt att notera gällande rotationsalgoritmerna för splay-trädet:
+I AVL är vi intresserade av att balansen kring en nod är den rätta, dvs. vi känner till en 
+nod som är toppen av det subträd som roteras. I splay däremot känner vi till en nod 
+någonstans som skall vandra uppåt i trädet, vilket gör att AVLs rotationsimplementationer 
+inte är de optimala. Metoderna som ursprungligen är hämtade från AVL_Tree är modifierade
+för att passa splay-trädet smidigare, vilket ger renare anrop i själva splay-metoden.
+
+Noden i argumentet för varje rotationsmetod är alltså nedanför rotationspunkten i samtliga fall. 
