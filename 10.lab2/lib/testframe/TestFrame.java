@@ -1,3 +1,4 @@
+package testframe;
 
 import java.awt.event.*;
 import java.io.*;
@@ -31,8 +32,8 @@ public class TestFrame extends JFrame implements ActionListener {
     CollectionWithGet<TestMapWithCounter.TestMapEntry<String,List<Integer>>>
 	containerSLC   =   new SortedLinkedCollection<TestMapWithCounter.TestMapEntry<String,List<Integer>>>(),
 	containerBST   =   new BSTwithGet<TestMapWithCounter.TestMapEntry<String,List<Integer>>>(),
-        containerAVL   =   new AVLwithGet<TestMapWithCounter.TestMapEntry<String,List<Integer>>>();
-//      containerSplay =   ;
+        containerAVL   =   new AVLwithGet<TestMapWithCounter.TestMapEntry<String,List<Integer>>>(),
+      containerSplay =   new SplayTree<TestMapWithCounter.TestMapEntry<String,List<Integer>>>();
     
     /*    **************************************************  */   
 
@@ -45,8 +46,8 @@ public class TestFrame extends JFrame implements ActionListener {
   TestMapWithCounter<String,List<Integer>> avlMap =
      new TestMapWithCounter<String,List<Integer>>(containerAVL);
 
-//  TestMapWithCounter<String,List<Integer>> splayMap =
-//     new TestMapWithCounter<String,List<Integer>>(containerSplay);
+  TestMapWithCounter<String,List<Integer>> splayMap =
+     new TestMapWithCounter<String,List<Integer>>(containerSplay);
 
   TestMapWithCounter<String,List<Integer>>  map =  bstMap;
 
@@ -76,8 +77,8 @@ public class TestFrame extends JFrame implements ActionListener {
 	    map = bstMap;
         else if ( e.getSource() == avl )
 	    map = avlMap;
-//        else  
-//	    map = splayMap;
+        else  
+	    map = splayMap;
     }
   }
 

@@ -1,5 +1,7 @@
 package datastructures;
 
+import java.util.List;
+
 import testSortCol.CollectionWithGet;
 
 public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree<E> implements CollectionWithGet<E>{
@@ -45,9 +47,9 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		 */
 		else if(this.root == x.parent){
 			if(x == x.parent.left){
-				rotateRight(x);
+				x = rotateRight(x);
 			} else {
-				rotateLeft(x);
+				x = rotateLeft(x);
 			}
 			this.root = x;
 		}
@@ -69,14 +71,18 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		 * 
 		 * 		(this might seem confusing, but rotations and ancestry don't match)
 		 */
-			if(x == gp.left.left){
-				rotateDoubleRight(x);
-			} else if(x == gp.left.right){
-				rotateLeftRight(x);
-			} else if(x == gp.right.left){
-				rotateRightLeft(x);
+			if(x.element.compareTo(gp.element) < 0){ // x is left-something
+				if(x == gp.left.left){
+					x = rotateDoubleRight(x);
+				} else { // left-right
+					x = rotateLeftRight(x);
+				}
 			} else {
-				rotateDoubleLeft(x);
+				if(x == gp.right.left){
+					x = rotateRightLeft(x);
+				} else {
+					x = rotateDoubleLeft(x);
+				}
 			}
 		/*
 		 * If root == x's grandparent
@@ -99,7 +105,7 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 	     / \            / \  
 	    B   C          A   B   
 	*/
-		private void rotateLeft(Entry x) {
+		private Entry rotateLeft(Entry x) {
 			Entry y = x.parent;
 			E tmp = y.element;
 			y.element = x.element;
@@ -116,6 +122,7 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 			if(x.left != null){
 				x.left.parent = x;
 			}
+			return y;
 		} // rotateLeft
 
 	/* Rotera 1 steg i högervarv, dvs 
@@ -130,7 +137,7 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 	 / \                    / \  
 	A   B                  B   C
 	*/
-	private void rotateRight(Entry x) {
+	private Entry rotateRight(Entry x) {
 		Entry y = x.parent;
 		E tmp = y.element;
 		y.element = x.element;
@@ -145,7 +152,8 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		}
 		if(x.right != null){
 			x.right.parent = x;
-		}		
+		}	
+		return y;
 	} //   rotateRight
 
 /* Rotera 2 steg vänster
@@ -157,7 +165,7 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 			   / \		   / \
 			  C	  D		  A	  B
  */
-	private void rotateDoubleLeft(Entry x){
+	private Entry rotateDoubleLeft(Entry x){
 		Entry y = x.parent;
 		Entry z = y.parent;
 		
@@ -186,6 +194,7 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 			x.left.parent = x;
 		}
 		
+		return z;
 	}
 
 /* Rotera 2 steg höger
@@ -197,7 +206,7 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 	   / \					   / \
 	  A   B					  C	  D
  */
-	private void rotateDoubleRight(Entry x){
+	private Entry rotateDoubleRight(Entry x){
 		Entry y = x.parent;
 		Entry z = y.parent;
 		
@@ -224,7 +233,8 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		}
 		if(x.right != null){
 			x.right.parent = x;
-		}		
+		}
+		return z;
 	}
 
 
@@ -240,7 +250,7 @@ A   x'             A   B C   D
    / \  
   B   C  
 */
-	private void rotateLeftRight(Entry x) {
+	private Entry rotateLeftRight(Entry x) {
 		Entry y = x.parent;
 		Entry z = y.parent;
 		
@@ -262,6 +272,7 @@ A   x'             A   B C   D
 		if(x.right != null){
 			x.right.parent = x;
 		}
+		return z;
 	} // rotateLeftRight
 
 /* Rotera höger sen vänster 
@@ -273,7 +284,7 @@ A   x'             A   B C   D
    / \  
   B   C  
 */
-	private void rotateRightLeft(Entry x) {
+	private Entry rotateRightLeft(Entry x) {
 		Entry y = x.parent;
 		Entry z = y.parent;
 		
@@ -295,6 +306,7 @@ A   x'             A   B C   D
 		if(x.left != null){
 			x.left.parent = x;
 		}
+		return z;
 	} // rotateRightLeft
 
 }
