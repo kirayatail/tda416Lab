@@ -7,18 +7,28 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 	
 	@Override
 	public E get(E e) {
-		// TODO get
-		return null;
+		Entry candidate = root;
+		int comparison;
+		while(candidate != null  && (comparison = candidate.element.compareTo(e)) != 0){
+			if(comparison < 0){
+				candidate = candidate.right;
+			} else {
+				candidate = candidate.left;
+			}
+		}
+		
+		if(candidate != null){
+			splay(candidate);
+			return candidate.element;
+		} else {
+			return null;
+		}
 	}
 	/*
 	 * Add och Remove kan ärvas från BST utan vidare.
 	 * 
-	 * 
 	 */
 	
-	/**
-	 * 
-	 */
 	private void splay(Entry x){
 		// PSEUDOKOD!! \\
 		
@@ -26,6 +36,9 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		 * If x == root
 		 * 		do nothing and return.
 		 */
+		if(this.root == x){
+			return;
+		}
 		
 		/*
 		 * If x's parent == root
@@ -36,11 +49,20 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		 * 
 		 * 		root = x
 		 */
-		
+		else if(this.root == x.parent){
+			if(x == x.parent.left){
+				rotateRight(x);
+			} else {
+				rotateLeft(x);
+			}
+			this.root = x;
+		}
 		/*
 		 * Get x's grandparent. (save for later)
 		 */
-		
+		else {
+			Entry gp = x.parent.parent;
+
 		/*
 		 * If x is the ... 
 		 * 		left-left kid   --  rotate double right
@@ -53,15 +75,27 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		 * 
 		 * 		(this might seem confusing, but rotations and ancestry don't match)
 		 */
-		
+			if(x == gp.left.left){
+				rotateDoubleRight(x);
+			} else if(x == gp.left.right){
+				rotateLeftRight(x);
+			} else if(x == gp.right.left){
+				rotateRightLeft(x);
+			} else {
+				rotateDoubleLeft(x);
+			}
 		/*
 		 * If root == x's grandparent
 		 * 		then root = x
 		 */
-		
+			if(this.root == gp){
+				this.root = x;
+			}
+		}
 		/*
 		 * Splay x again
 		 */
+		splay(x);
 	}
 	
 	 /* Rotera 1 steg i högervarv, dvs 
