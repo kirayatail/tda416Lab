@@ -4,19 +4,13 @@ import testSortCol.CollectionWithGet;
 
 public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree<E> implements CollectionWithGet<E>{
 	
+	public static void main(String[] args){
+		
+	}
 	
 	@Override
 	public E get(E e) {
-		Entry candidate = root;
-		int comparison;
-		while(candidate != null  && (comparison = candidate.element.compareTo(e)) != 0){
-			if(comparison < 0){
-				candidate = candidate.right;
-			} else {
-				candidate = candidate.left;
-			}
-		}
-		
+		Entry candidate = this.find(e, root);
 		if(candidate != null){
 			splay(candidate);
 			return candidate.element;
@@ -107,13 +101,21 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 	*/
 		private void rotateLeft(Entry x) {
 			Entry y = x.parent;
-			y.right = x.left;
+			E tmp = y.element;
+			y.element = x.element;
+			x.element = tmp;
+			
+			y.right = x.right;
+			x.right = x.left;
+			x.left = y.left;
+			y.left = x;
+			
 			if(y.right != null){
 				y.right.parent = y;
 			}
-			x.left = y;
-			x.parent = y.parent;
-			y.parent = x;
+			if(x.left != null){
+				x.left.parent = x;
+			}
 		} // rotateLeft
 
 	/* Rotera 1 steg i högervarv, dvs 
@@ -130,15 +132,20 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 	*/
 	private void rotateRight(Entry x) {
 		Entry y = x.parent;
-		y.left = x.right;
+		E tmp = y.element;
+		y.element = x.element;
+		x.element = tmp;
+		
+		y.left = x.left;
+		x.left = x.right;
+		x.right = y.right;
+		y.right = x;
 		if(y.left != null){
 			y.left.parent = y;
 		}
-		
-		x.right = y;
-		x.parent = y.parent;
-		y.parent = x;
-		
+		if(x.right != null){
+			x.right.parent = x;
+		}		
 	} //   rotateRight
 
 /* Rotera 2 steg vänster
@@ -154,20 +161,31 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		Entry y = x.parent;
 		Entry z = y.parent;
 		
-		z.right = y.left;
-		y.right = x.left;
+		E tmp = z.element;
+		z.element = x.element;
+		x.element = tmp;
 		
+		z.right = x.right; 	// D
+		y.right = x.left;	// C
+		x.right = y.left;	// B
+		x.left = z.left;	// A
+		
+		z.left = y;
+		y.left = x;
+				
 		if(z.right != null){
 			z.right.parent = z;
 		}
 		if(y.right != null){
 			y.right.parent = y;
 		}
-		y.left = z;
-		x.left = y;
-		x.parent = z.parent;
-		y.parent = x;
-		z.parent = y;
+		if(x.right != null){
+			x.right.parent = x;
+		}
+		if(x.left != null){
+			x.left.parent = x;
+		}
+		
 	}
 
 /* Rotera 2 steg höger
@@ -183,21 +201,30 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		Entry y = x.parent;
 		Entry z = y.parent;
 		
-		z.left = y.right;
-		y.left = x.right;
+		E tmp = z.element;
+		z.element = x.element;
+		x.element = tmp;
 		
+		z.left = x.left; 	// A
+		y.left = x.right;	// B
+		x.left = y.right;	// C
+		x.right = z.right;	// D
+		
+		z.right = y;
+		y.right = x;
+				
 		if(z.left != null){
 			z.left.parent = z;
 		}
 		if(y.left != null){
 			y.left.parent = y;
 		}
-		
-		y.right = z;
-		x.right = y;
-		x.parent = z.parent;
-		y.parent = x;
-		z.parent = y;		
+		if(x.left != null){
+			x.left.parent = x;
+		}
+		if(x.right != null){
+			x.right.parent = x;
+		}		
 	}
 
 
@@ -217,23 +244,24 @@ A   x'             A   B C   D
 		Entry y = x.parent;
 		Entry z = y.parent;
 		
-		y.right = x.left;
-		z.left = x.right;
+		E tmp = z.element;
+		z.element = x.element;
+		x.element = tmp;
+		
+						// A OK
+		y.right = x.left; 	// B
+		x.left = x.right; 	// C
+		x.right = z.right;	// D
+		
+		z.right = x;
+		x.parent = z;
 		
 		if(y.right != null){
 			y.right.parent = y;
 		}
-		if(z.left != null){
-			z.left.parent = z;
+		if(x.right != null){
+			x.right.parent = x;
 		}
-		
-		x.left = y;
-		x.right = z;
-		
-		x.parent = z.parent;
-		y.parent = x;
-		z.parent = x;
-
 	} // rotateLeftRight
 
 /* Rotera höger sen vänster 
@@ -249,23 +277,24 @@ A   x'             A   B C   D
 		Entry y = x.parent;
 		Entry z = y.parent;
 		
-		z.right = x.left;
-		y.left = x.right;
+		E tmp = z.element;
+		z.element = x.element;
+		x.element = tmp;
 		
-		if(z.right != null){
-			z.right.parent = z;
-		}
+						// D OK
+		y.left = x.right;	// C
+		x.right = x.left;	// B
+		x.left = z.left;	// A
+		
+		z.left = x;
+		x.parent = z;
+
 		if(y.left != null){
 			y.left.parent = y;
 		}
-		
-		x.left = z;
-		x.right = y;
-		
-		x.parent = z.parent;
-		y.parent = x;
-		z.parent = x;
-
+		if(x.left != null){
+			x.left.parent = x;
+		}
 	} // rotateRightLeft
 
 }
