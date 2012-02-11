@@ -14,7 +14,7 @@ import datastructures.LinkedCollection;
  * @param <E>
  *            implements java.util.Comparable<E>
  */
-public class SortedLinkedCollection<E extends Comparable<E>> extends
+public class SortedLinkedCollection<E extends Comparable<? super E>> extends
 		LinkedCollection<E> implements CollectionWithGet<E> {
 
 	public SortedLinkedCollection() {
@@ -32,9 +32,9 @@ public class SortedLinkedCollection<E extends Comparable<E>> extends
 	 *             if the element is <code>null</code>
 	 */
 	@Override
-	public boolean add(E element) throws IllegalArgumentException {
+	public boolean add(E element) throws NullPointerException {
 		if (element == null) {
-			throw new IllegalArgumentException("Argument cannot be null");
+			throw new NullPointerException("Argument cannot be null");
 		}
 		if (head == null) {
 			head = new Entry(element, null);
