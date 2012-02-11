@@ -4,7 +4,7 @@ import testSortCol.CollectionWithGet;
 
 /**
  * A data structure ensures quick access to elements recently accessed. Based on
- * a binary search tree elements are splayed to the top of the tre upon calls to
+ * a binary search tree elements are splayed to the top of the tree upon calls to
  * <code>get()</code>.
  * 
  * @author Max Witt, Sebastian Ljunggren
