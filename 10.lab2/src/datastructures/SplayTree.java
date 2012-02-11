@@ -101,7 +101,7 @@ public class SplayTree<E extends Comparable<? super E>> extends
 	}
 
 	/**
-	 * Rotate an entry one step to the left.
+	 * Rotates an entry one step to the left.
 	 * 
 	 * <pre>
 	 *   y'                 x'
@@ -136,7 +136,7 @@ public class SplayTree<E extends Comparable<? super E>> extends
 	}
 
 	/**
-	 * Rotate an entry one step to the left.
+	 * Rotates an entry one step to the right.
 	 * 
 	 * <pre>
 	 *     y'             x'
@@ -170,7 +170,7 @@ public class SplayTree<E extends Comparable<? super E>> extends
 	}
 
 	/**
-	 * Rotate an entry to the left twice.
+	 * Rotates an entry to the left twice.
 	 * 
 	 * <pre>
 	 *          z'                  x'
@@ -219,7 +219,7 @@ public class SplayTree<E extends Comparable<? super E>> extends
 	}
 
 	/**
-	 * Rotate an entry to the right twice.
+	 * Rotates an entry to the right twice.
 	 * 
 	 * <pre>
 	 *          z'              x'
@@ -309,7 +309,7 @@ public class SplayTree<E extends Comparable<? super E>> extends
 	}
 
 	/**
-	 * Rotates an entry to the left and then the right.
+	 * Rotates an entry to the right and then the left.
 	 * 
 	 * <pre>
 	 *    z'                  x'
