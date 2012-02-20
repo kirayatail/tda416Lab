@@ -1,15 +1,19 @@
+public class ComparableEdge extends Edge implements Comparable<ComparableEdge> {
 
-public class ComparableEdge extends Edge {
+	private final int weight;
 
-	public ComparableEdge(int from, int to) {
+	public ComparableEdge(int from, int to, int weight) {
 		super(from, to);
-		// TODO Auto-generated constructor stub
+		this.weight = weight;
 	}
 
 	@Override
 	public double getWeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.weight;
 	}
 
+	@Override
+	public int compareTo(ComparableEdge edge) {
+		return this.weight - edge.weight;
+	}
 }

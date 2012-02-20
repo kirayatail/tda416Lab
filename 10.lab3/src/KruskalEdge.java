@@ -1,15 +1,21 @@
 
-public class KruskalEdge extends Edge {
+public class KruskalEdge extends Edge implements Comparable<KruskalEdge> {
 
-	public KruskalEdge(int from, int to) {
+	private final int weight;
+
+	public KruskalEdge(int from, int to, int weight) {
 		super(from, to);
-		// TODO Auto-generated constructor stub
+		this.weight = weight;
 	}
 
 	@Override
 	public double getWeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.weight;
+	}
+
+	@Override
+	public int compareTo(KruskalEdge edge) {
+		return this.weight - edge.weight;
 	}
 
 }
