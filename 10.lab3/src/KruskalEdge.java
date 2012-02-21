@@ -17,5 +17,13 @@ public class KruskalEdge extends Edge implements Comparable<KruskalEdge> {
 	public int compareTo(KruskalEdge edge) {
 		return this.weight - edge.weight;
 	}
-
+	
+	@Override
+	public boolean equals(Object o){
+		if(o.getClass() == this.getClass()){
+			return (super.equals(o) && (((KruskalEdge) o).weight == this.weight));
+		} else {
+			return false;
+		}
+	}
 }
