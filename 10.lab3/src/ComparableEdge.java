@@ -14,11 +14,12 @@ public class ComparableEdge<E extends Edge> implements
 		this.weight = 0;
 	}
 	
-	public ComparableEdge(ComparableEdge<E> ce) {
+	public ComparableEdge(ComparableEdge<E> ce, E edge) {
 		this.edgeList = new LinkedList<E>();
 		this.edgeList.addAll(ce.edgeList);
-		this.to = ce.to;
+		this.from = ce.from;
 		this.weight = ce.weight;
+		this.addEdge(edge);
 	}
 
 	public void addEdge(E edge) {

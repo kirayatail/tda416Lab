@@ -30,11 +30,14 @@ public class DirectedGraph<E extends Edge> {
 			int shortestTo = shortest.getTo();
 			if(!visited[shortestTo]) {
 				if(shortestTo == to) {
-					return null;
+					return shortest.iterator();
 				} else {
 					visited[shortestTo] = true;
-					// loop through all edges from shortestTo
-					// add shortest + those not visited to queue
+					for (E edge: this.nodeArray[shortestTo]) {
+						if(!visited[edge.to]) {
+							edges.add(new ComparableEdge<E>(shortest, edge));
+						}
+					}
 				}
 			}
 		}
