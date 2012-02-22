@@ -8,8 +8,15 @@ public class ComparableEdge<E extends Edge> implements
 	private int to;
 
 	public ComparableEdge() {
-		edgeList = new LinkedList<E>();
+		this.edgeList = new LinkedList<E>();
 		this.weight = 0;
+	}
+	
+	public ComparableEdge(ComparableEdge<E> ce) {
+		this.edgeList = new LinkedList<E>();
+		this.edgeList.addAll(ce.edgeList);
+		this.to = ce.to;
+		this.weight = ce.weight;
 	}
 
 	public void addEdge(E edge) {
@@ -31,7 +38,11 @@ public class ComparableEdge<E extends Edge> implements
 	}
 	
 	public int getTo(){
-		return this.to;
+		if(!edgeList.isEmpty()){
+			return this.to;
+		} else {
+			throw new NoSuchElementException("ComparableEdge is empty");
+		}
 	}
 	
 	@Override
