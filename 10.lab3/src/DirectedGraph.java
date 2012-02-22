@@ -2,15 +2,19 @@ import java.util.*;
 
 public class DirectedGraph<E extends Edge> {
 
-	private List<E> edgeList;
+//	private List<E> edgeList;
+	private List<E>[] nodeArray;
 	private int noNodes;
 
 	public DirectedGraph(int noOfNodes) {
-		noNodes = noOfNodes;
-
+		
+		nodeArray = (List<E>[]) new LinkedList[this.noNodes];
+		for (int i = 0; i < nodeArray.length; i++) {
+			nodeArray[i] = new LinkedList<E>();
+		}
 		// Store all edges in a huge linkedlist. We want to iterate through
 		// every element in the mst method.
-		edgeList = new LinkedList<E>();
+		
 	}
 
 	public void addEdge(E e) {
