@@ -1,19 +1,47 @@
-public class ComparableEdge extends Edge implements Comparable<ComparableEdge> {
+import java.util.*;
 
-	private final int weight;
+public class ComparableEdge<E extends Edge> implements
+		Comparable<ComparableEdge<E>> {
 
-	public ComparableEdge(int from, int to, int weight) {
-		super(from, to);
-		this.weight = weight;
+	private List<E> edgeList;
+	private double weight;
+	private int to;
+
+	public ComparableEdge() {
+		edgeList = new LinkedList<E>();
+		this.weight = 0;
 	}
 
-	@Override
+	public void addEdge(E edge) {
+		edgeList.add(edge);
+		this.weight += edge.getWeight();
+		this.to = edge.to;
+	}
+
 	public double getWeight() {
 		return this.weight;
 	}
 
+	public int getFrom(){
+		if(!edgeList.isEmpty()){
+			return edgeList.get(0).from;
+		} else {
+			throw new NoSuchElementException("ComparableEdge is empty");
+		}
+	}
+	
+	public int getTo(){
+		return this.to;
+	}
+	
 	@Override
-	public int compareTo(ComparableEdge edge) {
-		return this.weight - edge.weight;
+	public int compareTo(ComparableEdge<E> edge) {
+		if (this.getWeight() < edge.getWeight()) {
+			return -1;
+		} else if (this.getWeight() == edge.getWeight()) {
+			return 0;
+		} else {
+			return 1;
+		}
 	}
 }
