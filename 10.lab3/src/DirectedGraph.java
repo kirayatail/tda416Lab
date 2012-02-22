@@ -28,7 +28,7 @@ public class DirectedGraph<E extends Edge> {
 	 * 
 	 * @return
 	 */
-	public Iterator<KruskalEdge<E>> minimumSpanningTree() {
+	public Iterator<E> minimumSpanningTree() {
 		// Create and populate PQ
 		PriorityQueue<KruskalEdge<E>> pq = new PriorityQueue<KruskalEdge<E>>();
 		Iterator<E> it = edgeList.iterator();
@@ -39,9 +39,9 @@ public class DirectedGraph<E extends Edge> {
 		// Create node array (each index represents a node number) which will
 		// contain empty lists of edges (components)
 		@SuppressWarnings("unchecked")
-		List<KruskalEdge<E>>[] nodeArray = (List<KruskalEdge<E>>[]) new LinkedList[this.noNodes];
+		List<E>[] nodeArray = (List<E>[]) new LinkedList[this.noNodes];
 		for (int i = 0; i < nodeArray.length; i++) {
-			nodeArray[i] = new LinkedList<KruskalEdge<E>>();
+			nodeArray[i] = new LinkedList<E>();
 		}
 
 		while (!pq.isEmpty()) {
@@ -67,9 +67,9 @@ public class DirectedGraph<E extends Edge> {
 
 				// Re-point each from and to from each edge in the "small"
 				// component and also add each edge to "big"
-				for (KruskalEdge<E> subEdge : nodeArray[small]) {
-					nodeArray[subEdge.getFrom()] = nodeArray[big];
-					nodeArray[subEdge.getTo()] = nodeArray[big];
+				for (E subEdge : nodeArray[small]) {
+					nodeArray[subEdge.from] = nodeArray[big];
+					nodeArray[subEdge.to] = nodeArray[big];
 					nodeArray[big].add(subEdge);
 				}
 
@@ -77,7 +77,7 @@ public class DirectedGraph<E extends Edge> {
 				nodeArray[small] = nodeArray[big];
 
 				// Add the candidate to "big"
-				nodeArray[big].add(candEdge);
+				nodeArray[big].add(candEdge.getEdge());
 				
 				// We're done if big's component has n-1 edges (where n = number
 				// of nodes)
@@ -106,7 +106,7 @@ public class DirectedGraph<E extends Edge> {
 		dg.addEdge(new BusEdge(0,1,6,""));
 		dg.addEdge(new BusEdge(0,3,5,""));
 		
-		Iterator<KruskalEdge<BusEdge>> it = dg.minimumSpanningTree();
+		Iterator<BusEdge> it = dg.minimumSpanningTree();
 		
 		while(it.hasNext()){
 			System.out.println(it.next());

@@ -37,6 +37,10 @@ public class KruskalEdge<E extends Edge> implements Comparable<KruskalEdge<E>> {
 		}
 	}
 
+	public E getEdge() {
+		return this.edge;
+	}
+
 	public String toString() {
 		return this.edge.toString();
 	}
