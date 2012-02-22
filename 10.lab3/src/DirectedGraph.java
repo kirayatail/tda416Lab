@@ -23,6 +23,19 @@ public class DirectedGraph<E extends Edge> {
 		boolean[] visited = new boolean[this.noNodes];
 		PriorityQueue<ComparableEdge<E>> edges = new PriorityQueue<ComparableEdge<E>>();
 		edges.add(new ComparableEdge<E>(from));
+		while (!edges.isEmpty()) {
+			ComparableEdge<E> shortest = edges.poll();
+			int shortestTo = shortest.getTo();
+			if(!visited[shortestTo]) {
+				if(shortestTo == tol) {
+					return null;
+				} else {
+					visited[shortestTo] = true;
+					// loop through all edges from shortestTo
+					// add shortest + those not visited to queue
+				}
+			}
+		}
 		return null;
 	}
 
