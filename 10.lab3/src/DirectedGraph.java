@@ -8,7 +8,7 @@ public class DirectedGraph<E extends Edge> {
 
 	public DirectedGraph(int noOfNodes) {
 		
-		nodeArray = (List<E>[]) new LinkedList[this.noNodes];
+		nodeArray = (List<E>[]) new LinkedList[noOfNodes];
 		for (int i = 0; i < nodeArray.length; i++) {
 			nodeArray[i] = new LinkedList<E>();
 		}
@@ -18,9 +18,7 @@ public class DirectedGraph<E extends Edge> {
 	}
 
 	public void addEdge(E e) {
-		if (!edgeList.contains(e)) {
-			edgeList.add(e);
-		}
+		this.nodeArray[e.from].add(e);
 	}
 
 	public Iterator<E> shortestPath(int from, int to) {
@@ -51,15 +49,17 @@ public class DirectedGraph<E extends Edge> {
 	public Iterator<E> minimumSpanningTree() {
 		// Create and populate PQ
 		PriorityQueue<KruskalEdge<E>> pq = new PriorityQueue<KruskalEdge<E>>();
-		Iterator<E> it = edgeList.iterator();
-		while (it.hasNext()) {
-			pq.add(new KruskalEdge<E>(it.next()));
+		for(List<E> edgeList : this.nodeArray){
+			Iterator<E> it = edgeList.iterator();
+			while (it.hasNext()) {
+				pq.add(new KruskalEdge<E>(it.next()));
+			}
 		}
 
 		// Create node array (each index represents a node number) which will
 		// contain empty lists of edges (components)
 		@SuppressWarnings("unchecked")
-		List<E>[] nodeArray = (List<E>[]) new LinkedList[this.noNodes];
+		List<E>[] nodeArray = (List<E>[]) new LinkedList[this.nodeArray.length];
 		for (int i = 0; i < nodeArray.length; i++) {
 			nodeArray[i] = new LinkedList<E>();
 		}
