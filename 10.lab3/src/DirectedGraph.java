@@ -5,7 +5,6 @@ public class DirectedGraph<E extends Edge> {
 	private List<E> edgeList;
 	private int noNodes;
 
-	@SuppressWarnings("unchecked")
 	public DirectedGraph(int noOfNodes) {
 		noNodes = noOfNodes;
 
@@ -39,6 +38,7 @@ public class DirectedGraph<E extends Edge> {
 
 		// Create node array (each index represents a node number) which will
 		// contain empty lists of edges (components)
+		@SuppressWarnings("unchecked")
 		List<E>[] nodeArray = (List<E>[]) new LinkedList[this.noNodes+1];
 		for (int i = 0; i < nodeArray.length; i++) {
 			nodeArray[i] = new LinkedList<E>();
