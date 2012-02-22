@@ -5,10 +5,12 @@ public class ComparableEdge<E extends Edge> implements
 
 	private List<E> edgeList;
 	private double weight;
-	private int to;
+	private int to, from;
 
-	public ComparableEdge() {
+	public ComparableEdge(int from) {
 		this.edgeList = new LinkedList<E>();
+		this.from = from;
+		this.to = from;
 		this.weight = 0;
 	}
 	
@@ -30,19 +32,11 @@ public class ComparableEdge<E extends Edge> implements
 	}
 
 	public int getFrom(){
-		if(!edgeList.isEmpty()){
-			return edgeList.get(0).from;
-		} else {
-			throw new NoSuchElementException("ComparableEdge is empty");
-		}
+		return this.from;
 	}
 	
 	public int getTo(){
-		if(!edgeList.isEmpty()){
-			return this.to;
-		} else {
-			throw new NoSuchElementException("ComparableEdge is empty");
-		}
+		return this.to;
 	}
 	
 	@Override

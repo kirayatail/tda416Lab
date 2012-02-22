@@ -20,6 +20,9 @@ public class DirectedGraph<E extends Edge> {
 	}
 
 	public Iterator<E> shortestPath(int from, int to) {
+		boolean[] visited = new boolean[this.noNodes];
+		PriorityQueue<ComparableEdge<E>> edges = new PriorityQueue<ComparableEdge<E>>();
+		edges.add(new ComparableEdge<E>(from));
 		return null;
 	}
 
