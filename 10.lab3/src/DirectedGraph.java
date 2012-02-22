@@ -27,7 +27,7 @@ public class DirectedGraph<E extends Edge> {
 			ComparableEdge<E> shortest = edges.poll();
 			int shortestTo = shortest.getTo();
 			if(!visited[shortestTo]) {
-				if(shortestTo == tol) {
+				if(shortestTo == to) {
 					return null;
 				} else {
 					visited[shortestTo] = true;
