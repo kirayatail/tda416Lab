@@ -49,4 +49,8 @@ public class ComparableEdge<E extends Edge> implements
 			return 1;
 		}
 	}
+	
+	public Iterator<E> iterator(){
+		return edgeList.iterator();
+	}
 }
