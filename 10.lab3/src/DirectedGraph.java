@@ -4,7 +4,6 @@ public class DirectedGraph<E extends Edge> {
 
 //	private List<E> edgeList;
 	private List<E>[] nodeArray;
-	private int noNodes;
 
 	public DirectedGraph(int noOfNodes) {
 		
@@ -22,7 +21,7 @@ public class DirectedGraph<E extends Edge> {
 	}
 
 	public Iterator<E> shortestPath(int from, int to) {
-		boolean[] visited = new boolean[this.noNodes];
+		boolean[] visited = new boolean[this.nodeArray.length];
 		PriorityQueue<ComparableEdge<E>> edges = new PriorityQueue<ComparableEdge<E>>();
 		edges.add(new ComparableEdge<E>(from));
 		while (!edges.isEmpty()) {
@@ -111,30 +110,4 @@ public class DirectedGraph<E extends Edge> {
 		}
 		return null;
 	}
-	
-	public static void main(String[] args){
-		
-		// Example from lecture
-		
-		DirectedGraph<BusEdge> dg = new DirectedGraph<BusEdge>(6); 
-		
-		dg.addEdge(new BusEdge(4,5,6,""));
-		dg.addEdge(new BusEdge(1,4,3,""));
-		dg.addEdge(new BusEdge(2,4,6,""));
-		dg.addEdge(new BusEdge(2,5,4,""));
-		dg.addEdge(new BusEdge(3,5,2,""));
-		dg.addEdge(new BusEdge(1,2,5,""));
-		dg.addEdge(new BusEdge(2,3,5,""));
-		dg.addEdge(new BusEdge(0,2,1,""));
-		dg.addEdge(new BusEdge(0,1,6,""));
-		dg.addEdge(new BusEdge(0,3,5,""));
-		
-		Iterator<BusEdge> it = dg.minimumSpanningTree();
-		
-		while(it.hasNext()){
-			System.out.println(it.next());
-		}
-		
-	}
-
 }

@@ -25,7 +25,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	// all needs to be visible outside the constructor
 	NodeTable<BusStop>      noderna  = new NodeTable<BusStop>();
-	DirectedGraph<BusEdge>  graphene;
+	DirectedGraph<BusEdge>  grafen;
 	PriorityQueue<String>   names;
 	JTextField              from     = new JTextField("", 20);
 	JTextField              to       = new JTextField("", 20);
@@ -186,7 +186,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 	// ====================================================================
 	private void findMinSpan() {
 		route.setText("");
-		Iterator<BusEdge> it = graphene.minimumSpanningTree();
+		Iterator<BusEdge> it = grafen.minimumSpanningTree();
 		if ( it != null && it.hasNext()) {
 			double totWeight = 0;  
 			int    totNodes  = 0;  // only for easier testing
@@ -238,7 +238,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 		int    totNodes  = 0;
 		route.setText("");
 		karta.clearLayer(DrawGraph.Layer.OVERLAY);
-		Iterator<BusEdge> it = graphene.shortestPath( start, slut); 
+		Iterator<BusEdge> it = grafen.shortestPath( start, slut); 
 		while ( it.hasNext() ) {
 			BusEdge e = it.next();
 			route.append( makeText1(e) + "\n");
@@ -304,7 +304,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 			
 			//  Read in the lines and add to the graph
 			indata =  new Scanner(new File("lines.noBOM.txt"), "UTF-8");
-			graphene = new DirectedGraph<BusEdge>(noderna.noOfNodes());
+			grafen = new DirectedGraph<BusEdge>(noderna.noOfNodes());
 			while ( indata.hasNext() ) {
 				String lineNo = indata.next();
 				int    antal  = indata.nextInt() -1;
@@ -317,7 +317,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 										(float)Math.random());
 				for (int i = 0; i < antal; i++ ) {
 					int to = noderna.find( indata.next() ).getNodeNo();
-					graphene.addEdge(
+					grafen.addEdge(
 						new BusEdge(from, to, indata.nextInt(), lineNo ));
 					// Draw
 					BusStop busFrom = noderna.find(from);
