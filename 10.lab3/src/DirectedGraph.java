@@ -54,7 +54,7 @@ public class DirectedGraph<E extends Edge> {
 		PriorityQueue<KruskalEdge<E>> pq = new PriorityQueue<KruskalEdge<E>>();
 		for (List<E> edgeList : this.nodeArray) {
 			for (E edge: edgeList) {
-				pq.add(new KruskalEdge<E>(edge);
+				pq.add(new KruskalEdge<E>(edge));
 			}
 		}
 
