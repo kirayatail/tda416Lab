@@ -44,7 +44,8 @@ public class DirectedGraph<E extends Edge> {
 	}
 
 	/**
-	 * Woho! Kruskal!
+	 * Implements Kruskal's algorithm for finding a minimum spanning tree.
+	 * Directions in the graph are disregarded in this matter.
 	 * 
 	 * @return
 	 */
@@ -60,9 +61,9 @@ public class DirectedGraph<E extends Edge> {
 		// Create node array (each index represents a node number) which will
 		// contain empty lists of edges (components)
 		@SuppressWarnings("unchecked")
-		List<E>[] nodeArray = (List<E>[]) new LinkedList[this.nodeArray.length];
-		for (int i = 0; i < nodeArray.length; i++) {
-			nodeArray[i] = new LinkedList<E>();
+		List<E>[] nodes = (List<E>[]) new LinkedList[this.nodeArray.length];
+		for (int i = 0; i < nodes.length; i++) {
+			nodes[i] = new LinkedList<E>();
 		}
 
 		while (!pq.isEmpty()) {
@@ -74,10 +75,11 @@ public class DirectedGraph<E extends Edge> {
 							// has the smallest/largest component
 
 			// Doesn't point to the same component, do the magic!
-			if (nodeArray[candEdge.getFrom()] != nodeArray[candEdge.getTo()]) {
+			if (nodes[candEdge.getFrom()] != nodes[candEdge.getTo()]) {
 
 				// Determine and set big and small
-				if (nodeArray[candEdge.getFrom()].size() >= nodeArray[candEdge
+
+				if (nodes[candEdge.getFrom()].size() >= nodes[candEdge
 						.getTo()].size()) {
 					big = candEdge.getFrom();
 					small = candEdge.getTo();
@@ -88,22 +90,22 @@ public class DirectedGraph<E extends Edge> {
 
 				// Re-point each from and to from each edge in the "small"
 				// component and also add each edge to "big"
-				for (E subEdge : nodeArray[small]) {
-					nodeArray[subEdge.from] = nodeArray[big];
-					nodeArray[subEdge.to] = nodeArray[big];
-					nodeArray[big].add(subEdge);
+				for (E subEdge : nodes[small]) {
+					nodes[subEdge.from] = nodes[big];
+					nodes[subEdge.to] = nodes[big];
+					nodes[big].add(subEdge);
 				}
 
 				// Re-point small to point at big's component.
-				nodeArray[small] = nodeArray[big];
+				nodes[small] = nodes[big];
 
 				// Add the candidate to "big"
-				nodeArray[big].add(candEdge.getEdge());
+				nodes[big].add(candEdge.getEdge());
 
 				// We're done if big's component has n-1 edges (where n = number
 				// of nodes)
-				if (nodeArray[big].size() == (nodeArray.length - 1)) {
-					return nodeArray[big].iterator();
+				if (nodes[big].size() == (nodes.length - 1)) {
+					return nodes[big].iterator();
 				}
 			}
 		}

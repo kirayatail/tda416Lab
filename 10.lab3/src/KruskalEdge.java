@@ -1,3 +1,12 @@
+
+/**
+ * Wrapper class for Edge with a compareTo which is only concerned with the
+ * weight of an edge.
+ * 
+ * @author Max Witt, Sebastian Ljunggren grp 10
+ * 
+ * @param <E>
+ */
 public class KruskalEdge<E extends Edge> implements Comparable<KruskalEdge<E>> {
 
 	private E edge;
@@ -26,15 +35,6 @@ public class KruskalEdge<E extends Edge> implements Comparable<KruskalEdge<E>> {
 
 	public int getTo() {
 		return this.edge.to;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (o.getClass() == this.getClass()) {
-			return (super.equals(o) && (((KruskalEdge<E>) o).compareTo(this) == 0));
-		} else {
-			return false;
-		}
 	}
 
 	public E getEdge() {
