@@ -1,15 +1,22 @@
 import java.util.*;
+
 /**
  * DirectedGraph
  * 
  * @author Sebastian Ljunggren, Max Witt grp 10
- *
+ * 
  * @param <E>
  */
 public class DirectedGraph<E extends Edge> {
 
 	private List<E>[] nodeArray;
 
+	/**
+	 * Creates a DirectedGraph with the specifies amount of nodes.
+	 * 
+	 * @param noOfNodes
+	 *            the amount of nodes in the graph
+	 */
 	@SuppressWarnings("unchecked")
 	public DirectedGraph(int noOfNodes) {
 
@@ -22,6 +29,12 @@ public class DirectedGraph<E extends Edge> {
 
 	}
 
+	/**
+	 * Adds an edge to the graph.
+	 * 
+	 * @param e
+	 *            the edge to add
+	 */
 	public void addEdge(E e) {
 		this.nodeArray[e.from].add(e);
 	}
@@ -33,7 +46,8 @@ public class DirectedGraph<E extends Edge> {
 	 *            the starting point
 	 * @param to
 	 *            the destination
-	 * @return an iterator for all edges in the shortest paths
+	 * @return an iterator for all edges in the shortest paths.
+	 *         <code>null</code> if no path is possible
 	 */
 	public Iterator<E> shortestPath(int from, int to) {
 		boolean[] visited = new boolean[this.nodeArray.length];
