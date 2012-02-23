@@ -1,5 +1,10 @@
 import java.util.*;
 
+/**
+ * @author Sebastian Ljunggren, Max Witt, grp 10
+ *
+ * @param <E>
+ */
 public class ComparableEdge<E extends Edge> implements
 		Comparable<ComparableEdge<E>> {
 

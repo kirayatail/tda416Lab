@@ -20,6 +20,15 @@ public class DirectedGraph<E extends Edge> {
 		this.nodeArray[e.from].add(e);
 	}
 
+	/**
+	 * Finds the shortest path (lowest weight) between two nodes in the graph.
+	 * 
+	 * @param from
+	 *            the starting point
+	 * @param to
+	 *            the destination
+	 * @return an iterator for all edges in the shortest paths
+	 */
 	public Iterator<E> shortestPath(int from, int to) {
 		boolean[] visited = new boolean[this.nodeArray.length];
 		PriorityQueue<ComparableEdge<E>> edges = new PriorityQueue<ComparableEdge<E>>();
@@ -53,7 +62,7 @@ public class DirectedGraph<E extends Edge> {
 		// Create and populate PQ
 		PriorityQueue<KruskalEdge<E>> pq = new PriorityQueue<KruskalEdge<E>>();
 		for (List<E> edgeList : this.nodeArray) {
-			for (E edge: edgeList) {
+			for (E edge : edgeList) {
 				pq.add(new KruskalEdge<E>(edge));
 			}
 		}
@@ -79,8 +88,8 @@ public class DirectedGraph<E extends Edge> {
 
 				// Determine and set big and small
 
-				if (nodes[candEdge.getFrom()].size() >= nodes[candEdge
-						.getTo()].size()) {
+				if (nodes[candEdge.getFrom()].size() >= nodes[candEdge.getTo()]
+						.size()) {
 					big = candEdge.getFrom();
 					small = candEdge.getTo();
 				} else {
