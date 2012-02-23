@@ -1,0 +1,6 @@
+Sebastian Ljunggren, Max Witt grp 10
+
+Vi har inte gjort några förändringar i de färdigskrivna klasserna.
+Vi ändrade namnen till ComparableEdge och DijkstraEdge vilket kändes mer logiskt.
+Det hade fungerat att skriva en Comparator istället för en comparable-klass
+men detta är tydligt nog för uppgiften.
