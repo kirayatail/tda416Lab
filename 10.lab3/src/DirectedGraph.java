@@ -6,14 +6,14 @@ public class DirectedGraph<E extends Edge> {
 
 	@SuppressWarnings("unchecked")
 	public DirectedGraph(int noOfNodes) {
-		
+
 		nodeArray = (List<E>[]) new LinkedList[noOfNodes];
 		for (int i = 0; i < nodeArray.length; i++) {
 			nodeArray[i] = new LinkedList<E>();
 		}
 		// Store all edges in a huge linkedlist. We want to iterate through
 		// every element in the mst method.
-		
+
 	}
 
 	public void addEdge(E e) {
@@ -27,13 +27,13 @@ public class DirectedGraph<E extends Edge> {
 		while (!edges.isEmpty()) {
 			ComparableEdge<E> shortest = edges.poll();
 			int shortestTo = shortest.getTo();
-			if(!visited[shortestTo]) {
-				if(shortestTo == to) {
+			if (!visited[shortestTo]) {
+				if (shortestTo == to) {
 					return shortest.iterator();
 				} else {
 					visited[shortestTo] = true;
-					for (E edge: this.nodeArray[shortestTo]) {
-						if(!visited[edge.to]) {
+					for (E edge : this.nodeArray[shortestTo]) {
+						if (!visited[edge.to]) {
 							edges.add(new ComparableEdge<E>(shortest, edge));
 						}
 					}
@@ -51,7 +51,7 @@ public class DirectedGraph<E extends Edge> {
 	public Iterator<E> minimumSpanningTree() {
 		// Create and populate PQ
 		PriorityQueue<KruskalEdge<E>> pq = new PriorityQueue<KruskalEdge<E>>();
-		for(List<E> edgeList : this.nodeArray){
+		for (List<E> edgeList : this.nodeArray) {
 			Iterator<E> it = edgeList.iterator();
 			while (it.hasNext()) {
 				pq.add(new KruskalEdge<E>(it.next()));
@@ -78,8 +78,8 @@ public class DirectedGraph<E extends Edge> {
 			if (nodeArray[candEdge.getFrom()] != nodeArray[candEdge.getTo()]) {
 
 				// Determine and set big and small
-				if (nodeArray[candEdge.getFrom()].size() >= nodeArray[candEdge.getTo()]
-						.size()) {
+				if (nodeArray[candEdge.getFrom()].size() >= nodeArray[candEdge
+						.getTo()].size()) {
 					big = candEdge.getFrom();
 					small = candEdge.getTo();
 				} else {
@@ -100,7 +100,7 @@ public class DirectedGraph<E extends Edge> {
 
 				// Add the candidate to "big"
 				nodeArray[big].add(candEdge.getEdge());
-				
+
 				// We're done if big's component has n-1 edges (where n = number
 				// of nodes)
 				if (nodeArray[big].size() == (nodeArray.length - 1)) {

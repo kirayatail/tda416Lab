@@ -13,7 +13,7 @@ public class ComparableEdge<E extends Edge> implements
 		this.to = from;
 		this.weight = 0;
 	}
-	
+
 	public ComparableEdge(ComparableEdge<E> ce, E edge) {
 		this.edgeList = new LinkedList<E>();
 		this.edgeList.addAll(ce.edgeList);
@@ -32,14 +32,14 @@ public class ComparableEdge<E extends Edge> implements
 		return this.weight;
 	}
 
-	public int getFrom(){
+	public int getFrom() {
 		return this.from;
 	}
-	
-	public int getTo(){
+
+	public int getTo() {
 		return this.to;
 	}
-	
+
 	@Override
 	public int compareTo(ComparableEdge<E> edge) {
 		if (this.getWeight() < edge.getWeight()) {
@@ -50,8 +50,8 @@ public class ComparableEdge<E extends Edge> implements
 			return 1;
 		}
 	}
-	
-	public Iterator<E> iterator(){
+
+	public Iterator<E> iterator() {
 		return edgeList.iterator();
 	}
 }
