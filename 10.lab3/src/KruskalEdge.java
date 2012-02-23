@@ -3,7 +3,7 @@
  * Wrapper class for Edge with a compareTo which is only concerned with the
  * weight of an edge.
  * 
- * @author Max Witt, Sebastian Ljunggren grp 10
+ * @author Sebastian Ljunggren, Max Witt grp 10
  * 
  * @param <E>
  */

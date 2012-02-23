@@ -1,5 +1,11 @@
 import java.util.*;
-
+/**
+ * DirectedGraph
+ * 
+ * @author Sebastian Ljunggren, Max Witt grp 10
+ *
+ * @param <E>
+ */
 public class DirectedGraph<E extends Edge> {
 
 	private List<E>[] nodeArray;
@@ -56,7 +62,7 @@ public class DirectedGraph<E extends Edge> {
 	 * Implements Kruskal's algorithm for finding a minimum spanning tree.
 	 * Directions in the graph are disregarded in this matter.
 	 * 
-	 * @return
+	 * @return iterator to the mst or null if it doesn't exist (bad graph)
 	 */
 	public Iterator<E> minimumSpanningTree() {
 		// Create and populate PQ
