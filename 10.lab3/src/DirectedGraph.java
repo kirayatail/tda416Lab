@@ -51,10 +51,10 @@ public class DirectedGraph<E extends Edge> {
 	 */
 	public Iterator<E> shortestPath(int from, int to) {
 		boolean[] visited = new boolean[this.nodeArray.length];
-		PriorityQueue<ComparableEdge<E>> edges = new PriorityQueue<ComparableEdge<E>>();
-		edges.add(new ComparableEdge<E>(from));
+		PriorityQueue<DijkstraEdge<E>> edges = new PriorityQueue<DijkstraEdge<E>>();
+		edges.add(new DijkstraEdge<E>(from));
 		while (!edges.isEmpty()) {
-			ComparableEdge<E> shortest = edges.poll();
+			DijkstraEdge<E> shortest = edges.poll();
 			int shortestTo = shortest.getTo();
 			if (!visited[shortestTo]) {
 				if (shortestTo == to) {
@@ -63,7 +63,7 @@ public class DirectedGraph<E extends Edge> {
 					visited[shortestTo] = true;
 					for (E edge : this.nodeArray[shortestTo]) {
 						if (!visited[edge.to]) {
-							edges.add(new ComparableEdge<E>(shortest, edge));
+							edges.add(new DijkstraEdge<E>(shortest, edge));
 						}
 					}
 				}
@@ -80,10 +80,10 @@ public class DirectedGraph<E extends Edge> {
 	 */
 	public Iterator<E> minimumSpanningTree() {
 		// Create and populate PQ
-		PriorityQueue<KruskalEdge<E>> pq = new PriorityQueue<KruskalEdge<E>>();
+		PriorityQueue<ComparableEdge<E>> pq = new PriorityQueue<ComparableEdge<E>>();
 		for (List<E> edgeList : this.nodeArray) {
 			for (E edge : edgeList) {
-				pq.add(new KruskalEdge<E>(edge));
+				pq.add(new ComparableEdge<E>(edge));
 			}
 		}
 
@@ -98,7 +98,7 @@ public class DirectedGraph<E extends Edge> {
 		while (!pq.isEmpty()) {
 
 			// Get the lightest edge
-			KruskalEdge<E> candEdge = pq.poll();
+			ComparableEdge<E> candEdge = pq.poll();
 
 			int small, big; // indices referring to which of the from-to pair
 							// has the smallest/largest component
