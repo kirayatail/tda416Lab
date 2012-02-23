@@ -2,9 +2,9 @@ import java.util.*;
 
 public class DirectedGraph<E extends Edge> {
 
-//	private List<E> edgeList;
 	private List<E>[] nodeArray;
 
+	@SuppressWarnings("unchecked")
 	public DirectedGraph(int noOfNodes) {
 		
 		nodeArray = (List<E>[]) new LinkedList[noOfNodes];
