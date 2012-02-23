@@ -52,9 +52,8 @@ public class DirectedGraph<E extends Edge> {
 		// Create and populate PQ
 		PriorityQueue<KruskalEdge<E>> pq = new PriorityQueue<KruskalEdge<E>>();
 		for (List<E> edgeList : this.nodeArray) {
-			Iterator<E> it = edgeList.iterator();
-			while (it.hasNext()) {
-				pq.add(new KruskalEdge<E>(it.next()));
+			for (E edge: edgeList) {
+				pq.add(new KruskalEdge<E>(edge);
 			}
 		}
 
